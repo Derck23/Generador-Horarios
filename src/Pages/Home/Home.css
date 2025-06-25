@@ -7,9 +7,9 @@
 }
 
 .login-card {
-  background-color: #2F4156;
+  background-color: #2f4156;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   width: 80%;
   max-width: 900px;
@@ -17,7 +17,8 @@
   color: white;
 }
 
-.login-left, .login-right {
+.login-left,
+.login-right {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -69,4 +70,132 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+}
+
+.home-page {
+  min-height: 100vh;
+  background: #d3e6f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 48px 0 48px;
+  background: transparent;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-img {
+  width: 36px;
+  height: 36px;
+}
+
+.logo-text {
+  color: #61a2ff;
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.home-nav {
+  display: flex;
+  gap: 40px;
+}
+
+.home-nav a {
+  color: #46687c;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding-bottom: 4px;
+  border-bottom: 3px solid transparent;
+  transition: border 0.2s;
+}
+
+.home-nav a.active {
+  font-weight: 600;
+  border-bottom: 3px solid #46687c;
+}
+
+.logout-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #46687c;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.logout-icon {
+  font-size: 1.3rem;
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bienvenido {
+  font-size: 2.2rem;
+  color: #6b8ca2;
+  letter-spacing: 0.25em;
+  font-weight: 400;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.nombre {
+  font-size: 1.4rem;
+  color: #46687c;
+  margin-bottom: 32px;
+}
+
+.crear-horario-btn {
+  font-size: 1.1rem;
+  padding: 12px 36px;
+  border: 2px solid #6b8ca2;
+  background: transparent;
+  color: #46687c;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.crear-horario-btn:hover {
+  background: #6b8ca2;
+  color: #fff;
+}
+
+.home-footer {
+  background: #6b8ca2;
+  color: #e3f0fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 0 8px 0;
+  margin-top: 32px;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 24px;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.footer-copy {
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
