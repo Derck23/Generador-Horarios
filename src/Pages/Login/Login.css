@@ -1,0 +1,30 @@
+.login-page {
+  height: 100vh;
+  background-color: #cce3f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background-color: #2F4156;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  width: 80%;
+  max-width: 900px;
+  padding: 20px;
+  color: white;
+}
+
+.login-left, .login-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-right img {
+  max-width: 90%;
+  height: auto;
+}

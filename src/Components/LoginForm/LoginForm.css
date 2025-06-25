@@ -1,0 +1,35 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.login-form input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #3d5a73;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.login-form .register-link {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.logo {
+  text-align: center;
+  font-size: 2rem;
+  color: #61a2ff;
+}
