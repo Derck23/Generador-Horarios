@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
+//import logo from '../../assets/logo.svg';
+import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
 import './Home.css';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="login-left">
-          <form className="login-form">
-              <img src={logo} alt="Logo" className="logo" />
-              <div className="button-row">
-                <Link to="/login">
-                  <button type="button">Iniciar sesion</button>
-                </Link>
-                <Link to="/register">
-                  <button type="button">Registrarse</button>
-                </Link>
-              </div>
-          </form>
+    <div className="home-page">
+      <Navbar active="HOME" />
+      {/*<header className="home-header">
+        <div className="logo-area">
+          <img src={logo} alt="Logo" className="logo-img" />
+          <span className="logo-text">Bit</span>
         </div>
-      </div>
+        <nav className="home-nav">
+          <a href="#" className="active">HOME</a>
+          <a href="#">HORARIOS</a>
+          <a href="#">PROFESORES</a>
+          <a href="#">MATERIAS</a>
+        </nav>
+        <div className="logout-area">
+          <span>SALIR</span>
+          <span className="logout-icon">⎋</span>
+        </div>
+      </header>*/}
+      <main className="home-main">
+        <h2 className="bienvenido">¡B I E N V E N I D O!</h2>
+        <p className="nombre">Alicia Pérez Rebolledo</p>
+        <button className="crear-horario-btn">Crear horario</button>
+      </main>
+      {/*<footer className="home-footer">
+        <div className="footer-icons">
+          <span>ⓕ</span>
+          <span>ⓘ</span>
+          <span>ⓧ</span>
+        </div>
+        <div className="footer-copy">2025 Copyright Bit</div>
+      </footer>*/}
+      <Footer />
     </div>
   );
 };
