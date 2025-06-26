@@ -43,7 +43,7 @@ const LoginForm = () => {
       onChange={handleChange}
       required
     />
-    <button type="submit">ENTRAR</button>
+    <button type="submit">ENTRAR    prueba login form</button>
     {error && <p className="error">{error}</p>}
     <p className="register-link">
       ¿No tienes cuenta? <a href="/register">Registrarme</a>

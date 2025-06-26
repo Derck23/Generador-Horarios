@@ -2,13 +2,9 @@ import React from 'react';
 import './Login.css';
 import logo from '../../assets/logohorarios_1.png';
 import agenda from '../../assets/agenda.png';
-import { useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const Login = () => {
-  const navigate = useNavigate();
-  const handleNavigation = (path) => {
-        navigate(path);
-    };
   return (
     <div className="login-container">
       <div className="login-card">
@@ -20,7 +16,7 @@ const Login = () => {
           <form className="login-form">
             <input type="email" placeholder="Correo" />
             <input type="password" placeholder="Contraseña" />
-            <button type="submit"onClick={() => handleNavigation('/Home')}  >ENTRAR</button>
+            <Link to="/Home"><button type="submit" >ENTRAR</button></Link>
           </form>
           <p className="register-text">
             ¿No tienes cuenta? <a href="#">Registrarme</a>
