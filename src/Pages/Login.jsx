@@ -1,7 +1,8 @@
 import React from 'react';
-import './Login.css';
-import logo from '../../assets/logohorarios_1.png';
-import agenda from '../../assets/agenda.png';
+import '../styles/global.css';
+import '../styles/login.css';
+import logo from '../assets/logohorarios_1.png';
+import agenda from '../assets/calendar.png';
 import { Link} from 'react-router-dom';
 
 const Login = () => {
@@ -12,12 +13,14 @@ const Login = () => {
         <div className="login-logo-wrapper">
           <img src={logo} alt="Logo" className="login-logo" />
         </div>
-        <div className="login-content">
+        <div className="login-form-wrapper">
           <form className="login-form">
-            <input type="email" placeholder="Correo" />
-            <input type="password" placeholder="Contraseña" />
+            <input type="email" placeholder="Correo: " />
+            <input type="password" placeholder="Contraseña: " />
             <Link to="/Home"><button type="submit" >ENTRAR</button></Link>
           </form>
+          </div>
+          <div className="login-content">
           <p className="register-text">
             ¿No tienes cuenta? <a href="#">Registrarme</a>
           </p>

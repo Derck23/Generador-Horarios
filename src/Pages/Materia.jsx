@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../../Components/Navbar/Navbar';
-import Footer from '../../Components/Footer/Footer';
-import '../Home/Home.css';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+import '../styles/home.css';
 
 const materias = [
   {

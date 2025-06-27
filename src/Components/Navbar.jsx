@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
+import logo from '.././assets/logohorarios_1.png';
 import { Link } from 'react-router-dom';
 //import './Navbar.css';
 
@@ -7,7 +7,6 @@ const Navbar = ({ active }) => (
   <header className="home-header">
     <div className="logo-area">
       <img src={logo} alt="Logo" className="logo-img" />
-      <span className="logo-text">Bit</span>
     </div>
     <nav className="home-nav">
       <Link to="/Home" className={active === 'HOME' ? 'active' : ''}>HOME</Link>

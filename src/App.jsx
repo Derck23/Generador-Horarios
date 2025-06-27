@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Pages/Login/Login';
-import Home from './Pages/Home/Home';
-import Materia from './Pages/Opciones/Materia';
-import Horario from './Pages/Opciones/Horario';
-import Profesor from './Pages/Opciones/Profesor';
-import Usuario from './Pages/Opciones/Usuario';
+import Login from './Pages/Login';
+import Home from './Pages/Home';
+import Materia from './Pages/Materia';
+import Horario from './Pages/Horario';
+import Profesor from './Pages/Profesor';
+import Usuario from './Pages/Usuario';
 
 
 function App() {
