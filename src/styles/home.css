@@ -1,201 +1,69 @@
-.login-page {
-  height: 100vh;
-  background-color: #cce3f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-card {
-  background-color: #2f4156;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  width: 80%;
-  max-width: 900px;
-  padding: 100px;
-  color: white;
-}
-
-.login-left,
-.login-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-right img {
-  max-width: 90%;
-  height: auto;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 80%;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.login-form input {
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-}
-
-.login-form button {
-  padding: 10px;
-  background-color: #3d5a73;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.login-form .register-link {
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-.logo {
-  text-align: center;
-  font-size: 2rem;
-  color: #61a2ff;
-}
-
-.button-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
 .home-page {
   min-height: 100vh;
-  background: #d3e6f7;
   display: flex;
   flex-direction: column;
 }
-
-.home-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32px 48px 0 48px;
-  background: transparent;
-}
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-img {
-  width: 36px;
-  height: 36px;
-}
-
-.logo-text {
-  color: #61a2ff;
-  font-size: 1.7rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
-
-.home-nav {
-  display: flex;
-  gap: 40px;
-}
-
-.home-nav a {
-  color: #46687c;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  padding-bottom: 4px;
-  border-bottom: 3px solid transparent;
-  transition: border 0.2s;
-}
-
-.home-nav a.active {
-  font-weight: 600;
-  border-bottom: 3px solid #46687c;
-}
-
-.logout-area {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #46687c;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.logout-icon {
-  font-size: 1.3rem;
-}
-
-.home-main {
+.homeadmin-main {
   flex: 1;
+  min-height: calc(100vh - 160px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: #C8D9E6;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.bienvenido {
+.homeadmin-bienvenido {
   font-size: 2.2rem;
   color: #6b8ca2;
-  letter-spacing: 0.25em;
-  font-weight: 400;
-  margin-bottom: 12px;
-  margin-top: 0;
+  letter-spacing: 0.42em;
+  font-weight: 100;
+  margin-bottom: 50px;
 }
 
-.nombre {
+.homeadmin-nombre {
   font-size: 1.4rem;
-  color: #46687c;
-  margin-bottom: 32px;
+  color: #2F4156;
+  margin-bottom: 50px;
 }
 
-.crear-horario-btn {
+.homeadmin-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: auto;
+  margin-top: 10px;
+}
+
+.homeadmin-btn {
   font-size: 1.1rem;
-  padding: 12px 36px;
+  padding: 12px;
   border: 2px solid #6b8ca2;
   background: transparent;
   color: #46687c;
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+  width: 100%;
 }
 
-.crear-horario-btn:hover {
+.homeadmin-btn:hover {
   background: #6b8ca2;
   color: #fff;
 }
 
-.home-footer {
-  background: #6b8ca2;
-  color: #e3f0fa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 18px 0 8px 0;
-  margin-top: 32px;
-}
 
-.footer-icons {
-  display: flex;
-  gap: 24px;
-  font-size: 1.3rem;
-  margin-bottom: 4px;
-}
+@media (min-width: 600px) {
+  .homeadmin-btn-group {
+    flex-direction: row;
+    justify-content: center;
+  }
 
-.footer-copy {
-  font-size: 0.9rem;
-  opacity: 0.7;
+  .homeadmin-btn {
+    max-width: 200px;
+  }
 }

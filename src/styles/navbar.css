@@ -1,0 +1,136 @@
+.home-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 0;
+    background: #C8D9E6;
+    gap: 16px;
+  }
+  
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-img {
+    width: 70px;
+    height: 40px;
+  }
+  
+  .logo-text {
+    color: #61a2ff;
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  
+  .home-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .home-nav a {
+    color: #46687c;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: border 0.2s;
+  }
+  
+  .home-nav a.active {
+    font-weight: 600;
+    border-bottom: 3px solid #46687c;
+  }
+  
+  .logout-area {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logout-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #46687c;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+  
+  .logout-link:hover {
+    color: #2f4156;
+  }
+  
+  .logout-icon {
+    font-size: 1.2rem;
+  }
+  
+  @media (max-width: 1024px) {
+    .home-header {
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      gap: 20px;
+    }
+  
+    .home-nav {
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      width: 100%;
+    }
+  
+    .logout-area {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .home-header {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+  
+    .logo-img {
+      width: 60px;
+      height: auto;
+    }
+  
+    .home-nav {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+  
+    .logout-area {
+      justify-content: center;
+      margin-top: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-text {
+      font-size: 1.4rem;
+    }
+  
+    .home-nav a {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+  
+    .logout-link {
+      font-size: 1rem;
+    }
+  }
