@@ -1,0 +1,127 @@
+.crearcolegio-container {
+  background-color: rgba(0, 0, 0, 0.4);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.crearcolegio-card {
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.crearcolegio-title {
+  font-size: 28px;
+  color: #2F4156;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.crearcolegio-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.crearcolegio-label {
+  color: #2F4156;
+  font-size: 16px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.crearcolegio-input {
+  padding: 12px 20px;
+  border: 2px solid #567C8D;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #567C8D;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  margin-bottom: 30px;
+}
+
+.crearcolegio-input::placeholder {
+  color: #567C8D;
+  opacity: 1;
+}
+
+.crearcolegio-btn {
+  background-color: #567C8D;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.crearcolegio-btn:hover {
+  background-color: #4a6c7b;
+  transform: translateY(-2px);
+}
+
+.crearcolegio-cancelar {
+  background-color: #567C8D;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.crearcolegio-cancelar:hover {
+  background-color: white;
+  color: #223348;
+}
+
+@media (max-width: 600px) {
+  .crearcolegio-card {
+    padding: 25px;
+  }
+
+  .crearcolegio-title {
+    font-size: 22px;
+  }
+
+  .crearcolegio-input {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .crearcolegio-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .crearcolegio-cancelar {
+    font-size: 13px;
+  }
+}

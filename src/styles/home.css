@@ -1,0 +1,69 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.homeadmin-main {
+  flex: 1;
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #C8D9E6;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.homeadmin-bienvenido {
+  font-size: 2.2rem;
+  color: #6b8ca2;
+  letter-spacing: 0.42em;
+  font-weight: 100;
+  margin-bottom: 50px;
+}
+
+.homeadmin-nombre {
+  font-size: 1.4rem;
+  color: #2F4156;
+  margin-bottom: 50px;
+}
+
+.homeadmin-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: auto;
+  margin-top: 10px;
+}
+
+.homeadmin-btn {
+  font-size: 1.1rem;
+  padding: 12px;
+  border: 2px solid #6b8ca2;
+  background: transparent;
+  color: #46687c;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  width: 100%;
+}
+
+.homeadmin-btn:hover {
+  background: #6b8ca2;
+  color: #fff;
+}
+
+
+@media (min-width: 600px) {
+  .homeadmin-btn-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .homeadmin-btn {
+    max-width: 200px;
+  }
+}
