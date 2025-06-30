@@ -108,7 +108,6 @@
 .login-form input::placeholder {
   color: white !important;
   opacity: 1 !important;
-  font-family: 'Verdana', sans-serif !important; 
   font-size: 14px !important; 
 }
 
