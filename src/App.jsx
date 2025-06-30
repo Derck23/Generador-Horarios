@@ -8,6 +8,7 @@ import Profesor from './Pages/Profesor';
 import Usuario from './Pages/Usuario';
 import CrearColegio from './Components/Modal/CrearColegio';
 import RegistrarUsuario from './Components/Modal/RegistrarUsuario';
+import RegistrarMateria from './Components/Modal/RegistrarMateria';
 import HomeAdmin from './Pages/HomeAdmin';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         <Route path="/Usuario" element={<Usuario />} />
         <Route path="/crear-colegio" element={<CrearColegio />} />
         <Route path="/registrar-usuario" element={<RegistrarUsuario />} />
-
+        <Route path="/registrar-materia" element={<RegistrarMateria />} />
       </Routes>
     </Router>
   );
