@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Instancia base de Axios
 const api = axios.create({
-  baseURL: 'https://tubackend.com/api', // <-- CAMBIA esto por tu endpoint real
+  baseURL: 'http://localhost:8080/', // <-- CAMBIA esto por tu endpoint real
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
