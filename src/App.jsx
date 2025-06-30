@@ -1,16 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Pages/Login';
-import HomeAdmin from './Pages/HomeAdmin';
+import Home from './Pages/HomeAdmin';
 import Materia from './Pages/Materia';
 import Horario from './Pages/Horario';
 import Profesor from './Pages/Profesor';
 import Usuario from './Pages/Usuario';
 import CrearColegio from './Components/Modal/CrearColegio';
 import RegistrarUsuario from './Components/Modal/RegistrarUsuario';
-
-
-
+import HomeAdmin from './Pages/HomeAdmin';
 
 function App() {
   return (

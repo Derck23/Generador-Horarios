@@ -98,6 +98,19 @@ const RegistrarUsuario = () => {
             <option value="Colegio B">Colegio B</option>
           </select>
 
+          <label className="crearcolegio-label">Rol</label>
+          <select
+            name="rol"
+            value={formData.rol}
+            onChange={handleChange}
+            className="crearcolegio-input"
+            required
+          >
+            <option value="">Seleccionar...</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Profesor">Profesor</option>
+          </select>
+
           <button type="submit" className="crearcolegio-btn">
             Guardar y continuar
           </button>
