@@ -22,7 +22,7 @@ const Login = () => {
           </div>
           <div className="login-content">
           <p className="register-text">
-            ¿No tienes cuenta? <a href="#">Registrarme</a>
+            ¿No tienes cuenta? <Link to="/registrar-usuario">Registrarme</Link>
           </p>
         </div>
         </div>

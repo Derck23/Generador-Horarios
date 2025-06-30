@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import '../../styles/modal.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const CrearColegio = () => {
   const [nombreColegio, setNombreColegio] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Colegio guardado:', nombreColegio);
   };
   const handleCancel = () => {
-    navigate('/'); 
-  };
+    console.log('cancelar');
+    window.location.href = '/Home';
+};
 
   return (
     <div className="crearcolegio-container">

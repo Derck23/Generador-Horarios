@@ -7,6 +7,8 @@ import Horario from './Pages/Horario';
 import Profesor from './Pages/Profesor';
 import Usuario from './Pages/Usuario';
 import CrearColegio from './Components/Modal/CrearColegio';
+import RegistrarUsuario from './Components/Modal/RegistrarUsuario';
+
 
 
 
@@ -21,6 +23,7 @@ function App() {
         <Route path="/Profesor" element={<Profesor />} />
         <Route path="/Usuario" element={<Usuario />} />
         <Route path="/crear-colegio" element={<CrearColegio />} />
+        <Route path="/registrar-usuario" element={<RegistrarUsuario />} />
 
       </Routes>
     </Router>
