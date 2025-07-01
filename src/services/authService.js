@@ -2,7 +2,7 @@ import api from './api';
 
 export const login = async (credentials) => {
   try {
-    const response = await api.post('/loginUsuario', credentials);
+    const response = await api.post('/auth/login', credentials);
     console.log('Login response:', response.data);
     return response.data;
   } catch (error) {
@@ -12,7 +12,7 @@ export const login = async (credentials) => {
 
 export const register = async (userData) => {
   try {
-    const response = await api.post('/registraUsuario', userData);
+    const response = await api.post('/auth/registrar', userData);
     return response.data;
   } catch (error) {
     throw error.response?.data || error;
