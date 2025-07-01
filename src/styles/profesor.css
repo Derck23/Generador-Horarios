@@ -1,0 +1,131 @@
+.profesores-page {
+    background: #C8D9E6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profesores-main {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  
+  .profesores-colegio h2 {
+    color: #2F4156;
+    font-weight: 400;
+  }
+  
+  .profesores-colegio p {
+    color: #567C8D;
+    padding-top: 5px;
+  }
+  
+  .profesores-controles {
+    display: flex;
+    gap: 50px;
+    justify-content: right;
+    padding-bottom: 25px;
+  }
+  
+  .profesores-busqueda {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 6px 10px;
+    border: 2px solid white !important;
+    border-radius: 20px !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    width: 28% !important;
+    position: relative;
+  }
+  
+  .profesores-busqueda input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #2F4156;
+  }
+  
+  .profesores-icono-buscar {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #2F4156;
+    cursor: pointer;
+  }
+  
+  .profesores-boton {
+    background: #567C8D;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .profesores-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: #C8D9E6;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(100, 150, 180, 0.07);
+    overflow: hidden;
+  }
+  
+  .profesores-tabla thead {
+    background: #6b8ca2;
+    color: white;
+    text-align: center;
+  }
+  
+  .profesores-tabla td{
+    padding: 14px 18px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #2F4156;
+  }
+
+  .profesores-tabla th {
+    padding: 14px 18px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+  }
+  
+  .profesor-chip {
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid #2F4156;
+    color: #2F4156;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  
+  .profesores-acciones svg {
+    margin-right: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #2F4156;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+  }
+  
