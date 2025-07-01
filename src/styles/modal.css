@@ -7,7 +7,7 @@
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -102,6 +102,18 @@
   color: #223348;
 }
 
+.crearcolegio-row {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.crearcolegio-row > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive para móviles */
 @media (max-width: 600px) {
   .crearcolegio-card {
     padding: 25px;
@@ -123,6 +135,11 @@
 
   .crearcolegio-cancelar {
     font-size: 13px;
+  }
+
+  .crearcolegio-row {
+    flex-direction: column;
+    gap: 0;
   }
 }
 
