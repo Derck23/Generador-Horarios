@@ -1,0 +1,109 @@
+.horarios-page {
+    background: #C8D9E6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .horarios-main {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  
+  .horarios-colegio h2 {
+    color: #2F4156;
+    font-weight: 400;
+  }
+  
+  .horarios-colegio p {
+    color: #567C8D;
+    padding-top: 5px;
+  }
+  
+  .horarios-controles {
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    padding-bottom: 25px;
+  }
+  
+  .horarios-busqueda {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: 2px solid white;
+    border-radius: 20px;
+    background-color: transparent;
+    width: 30%;
+    position: relative;
+  }
+  
+  .horarios-busqueda input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #2F4156;
+    width: 100%;
+  }
+  
+  .horarios-icono-buscar {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #2F4156;
+    cursor: pointer;
+  }
+  
+  .horarios-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: #C8D9E6;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(100, 150, 180, 0.07);
+    overflow: hidden;
+  }
+  
+  .horarios-tabla thead {
+    background: #6b8ca2;
+    color: white;
+    text-align: center;
+  }
+  
+  .horarios-tabla th,
+  .horarios-tabla td {
+    padding: 14px 18px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  .horarios-tabla tbody tr {
+    color: #2F4156;
+  }
+  
+  .turno-chip {
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid #2F4156;
+    color: #2F4156;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  
+  .horarios-acciones svg {
+    margin-right: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+  }
+  

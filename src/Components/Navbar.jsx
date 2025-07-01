@@ -16,7 +16,7 @@ const Navbar = ({ active }) => (
       <Link to="/Profesor" className={active === 'PROFESORES' ? 'active' : ''}>PROFESORES</Link>
       <Link to="/Materia" className={active === 'MATERIAS' ? 'active' : ''}>MATERIAS</Link>
       <Link to="/Usuario" className={active === 'USUARIOS' ? 'active' : ''}>USUARIOS</Link>
-      <Link to="/Usuario" className={active === 'COLEGIOS' ? 'active' : ''}>COLEGIOS</Link>
+      <Link to="/Colegio" className={active === 'COLEGIOS' ? 'active' : ''}>COLEGIOS</Link>
     </nav>
     <div className="logout-area">
       <Link to="/" className="logout-link">

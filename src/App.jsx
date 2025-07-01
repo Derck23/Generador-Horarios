@@ -4,6 +4,7 @@ import Login from './Pages/Login';
 import Home from './Pages/HomeAdmin';
 import Materia from './Pages/Materia';
 import Horario from './Pages/Horario';
+import Colegio from './Pages/Colegio';
 import Profesor from './Pages/Profesor';
 import Usuario from './Pages/Usuario';
 import CrearColegio from './Components/Modal/CrearColegio';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/Horario" element={<Horario />} />
         <Route path="/Profesor" element={<Profesor />} />
         <Route path="/Usuario" element={<Usuario />} />
+        <Route path="/Colegio" element={<Colegio />} />
         <Route path="/crear-colegio" element={<CrearColegio />} />
         <Route path="/registrar-usuario" element={<RegistrarUsuario />} />
         <Route path="/registrar-materia" element={<RegistrarMateria />} />
