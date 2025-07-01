@@ -45,13 +45,14 @@
     display: flex;
     align-items: center;
     color: white;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border: 2px solid white !important;
     border-radius: 20px !important;
     background-color: transparent !important;
     color: #ffffff !important;
     font-size: 16px !important;
     width: 28% !important;
+    position: relative;
   }
   
   .materias-busqueda input {
@@ -59,14 +60,18 @@
     background: transparent;
     outline: none;
     font-size: 14px;
-    color: #46687c;
+    color: #2F4156;
   }
   
   .materias-icono-buscar {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 18px;
-    color: #6b8ca2;
-    margin-left: 4px;
-  }
+    color: #2F4156;
+    cursor: pointer;
+    }
   
   .materias-boton {
     background: #567C8D;
@@ -94,7 +99,7 @@
   .materias-tabla thead {
     background: #6b8ca2;
     color: white;
-    text-align: left;
+    text-align:center;
   }
   
   .materias-tabla th,
@@ -105,18 +110,18 @@
   }
   
   .materias-tabla tbody tr {
-    border-bottom: 1px solid #b2cbe2;
-    color: #46687c;
+    color: #2F4156;
+    text-align:center;
   }
   
-  .materias-chip {
+  .grupo-chip {
     display: inline-block;
-    background: #e3f0fa;
-    border: 1px solid #6b8ca2;
-    color: #46687c;
-    border-radius: 16px;
-    padding: 2px 10px;
-    font-size: 13px;
+    background: transparent;
+    border: 1.5px solid #2F4156;
+    color: #2F4156;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
     margin-right: 6px;
     margin-bottom: 4px;
   }
@@ -130,6 +135,24 @@
   .accion-icono{
     width: 40px;
     height: 22px;
+    cursor: pointer;
     
+}
+
+.materias-controles{
+    display: flex;
+    gap: 50px;
+    justify-content: right;
+    padding-bottom: 25px;
+}
+
+.materias-colegio h2{
+    color: #2F4156;
+    font-weight: 400;
+}
+
+.materias-colegio p{
+    color: #567C8D;
+    padding-top: 5px;
 }
   

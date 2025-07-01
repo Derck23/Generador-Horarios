@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import '../styles/materia.css';
-import { FiEye, FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import RegistrarMateria from '../Components/Modal/RegistrarMateria';
 
 const Materia = () => {
@@ -65,6 +65,16 @@ const Materia = () => {
     setMaterias(datosEjemplo);
   }, []);
 
+  const handleVerMateria = (materia) => {
+  };
+
+  const handleEditarMateria = (materia) => {
+  };
+
+  const handleEliminarMateria = (id) => {
+  };
+
+
   return (
     <div className="materias-page">
       <Navbar active="MATERIAS" />
@@ -78,7 +88,7 @@ const Materia = () => {
           <div className="materias-controles">
             <div className="materias-busqueda">
               <input type="text" placeholder="Buscar..." />
-              <span className="icono-busqueda">🔍</span>
+              <FiSearch className="materias-icono-buscar" />
             </div>
             <button
               className="materias-boton"
@@ -113,9 +123,9 @@ const Materia = () => {
                 </td>
                 <td>{materia.horas}</td>
                 <td className="materias-acciones">
-                  <FiEye className="accion-icono" title="Ver" />
-                  <FiEdit2 className="accion-icono" title="Editar" />
-                  <FiTrash2 className="accion-icono" title="Eliminar" />
+                  <FiEye className="accion-icono" title="Ver" onClick={() => handleVerMateria(materia)} />
+                  <FiEdit2 className="accion-icono" title="Editar" onClick={() => handleEditarMateria(materia)}/>
+                  <FiTrash2 className="accion-icono" title="Eliminar" onClick={() => handleEliminarMateria(materia.id)}/>
                 </td>
               </tr>
             ))}
