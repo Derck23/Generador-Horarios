@@ -19,13 +19,6 @@
     height: 40px;
   }
   
-  .logo-text {
-    color: #61a2ff;
-    font-size: 1.7rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-  }
-  
   .home-nav {
     display: flex;
     flex-wrap: wrap;

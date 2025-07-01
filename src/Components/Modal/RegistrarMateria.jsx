@@ -6,7 +6,7 @@ const RegistrarMateria = () => {
 
 const handleCancel = () => {
     console.log('cancelar');
-    window.location.href = '/Home';
+    window.location.href = '/Materia';
 };
 
   return (
