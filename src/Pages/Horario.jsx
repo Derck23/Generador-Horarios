@@ -24,11 +24,6 @@ const Horario = () => {
     <div className="horarios-page">
       <Navbar active="HORARIOS" />
       <main className="horarios-main">
-        <div className="horarios-colegio">
-          <h2>Colegio Nuevo Continente</h2>
-          <p>Plantel Querétaro</p>
-          <p>Nivel: Secundaria</p>
-        </div>
 
         <div className="horarios-controles">
           <div className="horarios-busqueda">
