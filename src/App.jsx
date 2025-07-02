@@ -11,13 +11,14 @@ import CrearColegio from './Components/Modal/CrearColegio';
 import RegistrarUsuario from './Components/Modal/RegistrarUsuario';
 import RegistrarMateria from './Components/Modal/RegistrarMateria';
 import HomeAdmin from './Pages/HomeAdmin';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/Home" element={<HomeAdmin />} />
+        <Route path="/Home" element={/*<ProtectedRoute>*/<HomeAdmin />/*</ProtectedRoute>*/} />
         <Route path="/Materia" element={<Materia />} />
         <Route path="/Horario" element={<Horario />} />
         <Route path="/Profesor" element={<Profesor />} />
