@@ -1,63 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import '../styles/profesor.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
-
-const profesores = [
-  {
-    id: 1,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 2,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 3,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 4,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 5,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 6,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 7,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-];
+import RegistrarProfesor from '../Components/Modal/RegistrarProfesor';
+import { listarProfesores } from '../services/profesorService'; // Importa el servicio
 
 const Profesor = () => {
   const [buscar, setBuscar] = useState('');
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [profesores, setProfesores] = useState([]); // Nuevo estado
+
+  useEffect(() => {
+    const fetchProfesores = async () => {
+      try {
+        const data = await listarProfesores();
+        console.log("Respuesta de listarProfesores:", data);
+        setProfesores(Array.isArray(data.data) ? data.data : []);
+      } catch (error) {
+        console.error("Error al cargar los profesores:", error);
+        setProfesores([]);
+      }
+    };
+    fetchProfesores();
+  }, []);
 
   const handleBuscar = () => {
   };
@@ -82,7 +48,10 @@ const Profesor = () => {
             />
             <FiSearch className="profesores-icono-buscar" onClick={handleBuscar} />
           </div>
-          <button className="profesores-boton">
+          <button
+            className="profesores-boton"
+            onClick={() => setMostrarModal(true)}
+          >
             <span>＋</span> Crear profesor
           </button>
         </div>
@@ -100,14 +69,16 @@ const Profesor = () => {
           <tbody>
             {profesores.map((profesor) => (
               <tr key={profesor.id}>
-                <td>{profesor.nombre}</td>
                 <td>
-                  {profesor.materias.map((materia, index) => (
+                  {`${profesor.nombre || profesor.nombres || ''} ${profesor.apellidoPaterno || ''} ${profesor.apellidoMaterno || ''}`}
+                </td>
+                <td>
+                  {(profesor.materias || []).map((materia, index) => (
                     <span key={index} className="profesor-chip">{materia}</span>
                   ))}
                 </td>
                 <td>
-                  {profesor.grupos.map((grupo, index) => (
+                  {(profesor.grupos || []).map((grupo, index) => (
                     <span key={index} className="profesor-chip">{grupo}</span>
                   ))}
                 </td>
@@ -121,6 +92,28 @@ const Profesor = () => {
             ))}
           </tbody>
         </table>
+        {mostrarModal && (
+          <div className="modal-overlay">
+            <RegistrarProfesor />
+            <button
+              className="modal-close"
+              onClick={() => setMostrarModal(false)}
+              style={{
+                position: 'absolute',
+                top: 20,
+                right: 30,
+                background: 'transparent',
+                border: 'none',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                color: '#333'
+              }}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+          </div>
+        )}
       </main>
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 .crearcolegio-container {
-  background-color: rgba(0, 0, 0, 0.4);
+  /*background-color: rgba(0, 0, 0, 0.4);*/
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -23,6 +23,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: 90vh;      /* Limita la altura máxima */
+  overflow-y: auto; 
 }
 
 .crearcolegio-title {
@@ -141,5 +143,19 @@
     flex-direction: column;
     gap: 0;
   }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
 }
 

@@ -4,65 +4,24 @@ import Footer from '../Components/Footer';
 import '../styles/materia.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import RegistrarMateria from '../Components/Modal/RegistrarMateria';
+import { obtenerMaterias } from '../services/colegioService'; // <-- Importa el servicio
 
 const Materia = () => {
   const [materias, setMaterias] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
 
+  // Cargar materias desde el backend
   useEffect(() => {
-    const datosEjemplo = [
-      {
-        id: 1,
-        nombre: 'Física',
-        clave: 'FIS004',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 2,
-        nombre: 'Química',
-        clave: 'QUI004',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 3,
-        nombre: 'Inglés',
-        clave: 'ING004',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 4,
-        nombre: 'Matemáticas I',
-        clave: 'MAT001',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 5,
-        nombre: 'Matemáticas II',
-        clave: 'MAT002',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 6,
-        nombre: 'Matemáticas III',
-        clave: 'MAT003',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 7,
-        nombre: 'Español',
-        clave: 'ESPO04',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-    ];
-
-    setMaterias(datosEjemplo);
+    const fetchMaterias = async () => {
+      try {
+        const data = await obtenerMaterias();
+        setMaterias(data);
+      } catch (error) {
+        console.error("Error al obtener materias:", error);
+        setMaterias([]);
+      }
+    };
+    fetchMaterias();
   }, []);
 
   const handleVerMateria = (materia) => {
@@ -112,14 +71,18 @@ const Materia = () => {
           <tbody>
             {materias.map((materia) => (
               <tr key={materia.id}>
-                <td>{materia.nombre}</td>
-                <td>{materia.clave}</td>
+                <td>{materia.nombreMateria || materia.nombre}</td>
+                <td>{materia.clave || '-'}</td>
                 <td>
-                  {materia.grupos.map((grupo, index) => (
-                    <span key={index} className="grupo-chip">
-                      {grupo}
-                    </span>
-                  ))}
+                  {(materia.grupos && Array.isArray(materia.grupos)) ? (
+                    materia.grupos.map((grupo, index) => (
+                      <span key={index} className="grupo-chip">
+                        {grupo}
+                      </span>
+                    ))
+                  ) : (
+                    <span>-</span>
+                  )}
                 </td>
                 <td>{materia.horas}</td>
                 <td className="materias-acciones">
@@ -134,7 +97,14 @@ const Materia = () => {
       </main>
 
       {mostrarModal && (
-        <RegistrarMateria onClose={() => setMostrarModal(false)} />
+        <RegistrarMateria
+          onClose={() => setMostrarModal(false)}
+          onMateriaAgregada={() => {
+            // Recargar materias después de agregar
+            obtenerMaterias().then(setMaterias);
+            setMostrarModal(false);
+          }}
+        />
       )}
 
       <Footer />
