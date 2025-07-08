@@ -19,7 +19,6 @@ const RegistrarProfesor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Puedes convertir grupos y materiasAsignadas a arrays si lo requiere el backend
       await registrarProfesor({
         ...formData,
         grupos: formData.grupos.split(',').map(g => g.trim()),
@@ -61,6 +60,14 @@ const RegistrarProfesor = () => {
             type="text"
             value={formData.nombre}
             onChange={e => setFormData({ ...formData, nombre: e.target.value })}
+            className="crearcolegio-input"
+            required
+          />
+          <label className="crearcolegio-label">Email</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={e => setFormData({ ...formData, email: e.target.value })}
             className="crearcolegio-input"
             required
           />
