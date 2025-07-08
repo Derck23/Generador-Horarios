@@ -8,6 +8,8 @@ const RegistrarProfesor = () => {
     apellidoPaterno: '',
     apellidoMaterno: '',
     nombre: '',
+    email: '',
+    matricula: '',
     horasRestringidas: '',
     horasTrabajo: '',
     grupos: '',
@@ -68,6 +70,14 @@ const RegistrarProfesor = () => {
             type="email"
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
+            className="crearcolegio-input"
+            required
+          />
+          <label className="crearcolegio-label">Matricula</label>
+          <input
+            type="text"
+            value={formData.matricula}
+            onChange={e => setFormData({ ...formData, matricula: e.target.value })}
             className="crearcolegio-input"
             required
           />
