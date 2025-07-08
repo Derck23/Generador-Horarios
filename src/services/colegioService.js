@@ -33,7 +33,7 @@ export const registrarGrupo = async (data) => {
 export const gruposPorColegio = async (params) => {
   try {
     const response = await api.get("/colegio/gruposPorColegio", { params });
-    return response.data;
+    return response.data.data; // El array de grupos está en data.data
   } catch (error) {
     console.error("Error al obtener grupos por colegio:", error);
     throw error;

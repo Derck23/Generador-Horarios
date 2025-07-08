@@ -41,11 +41,12 @@ const Navbar = ({ active }) =>{
     </div>
     <nav className="home-nav">
       <Link to="/Home" className={active === 'HOME' ? 'active' : ''}>HOME</Link>
+      <Link to="/Colegio" className={active === 'COLEGIOS' ? 'active' : ''}>COLEGIOS</Link>
       <Link to="/Profesor" className={active === 'PROFESORES' ? 'active' : ''}>PROFESORES</Link>
       <Link to="/Materia" className={active === 'MATERIAS' ? 'active' : ''}>MATERIAS</Link>
       <Link to="/Horario" className={active === 'HORARIOS' ? 'active' : ''}>HORARIOS</Link>
       <Link to="/Usuario" className={active === 'USUARIOS' ? 'active' : ''}>USUARIOS</Link>
-      <Link to="/Colegio" className={active === 'COLEGIOS' ? 'active' : ''}>COLEGIOS</Link>
+      <Link to="/Grupo" className={active === 'GRUPOS' ? 'active' : ''}>GRUPOS</Link>
     </nav>
     <div className="logout-area">
       {isAuthenticated && (
