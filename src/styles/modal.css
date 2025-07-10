@@ -159,3 +159,31 @@
   overflow-y: auto;
 }
 
+.crearcolegio-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espacio entre cada materia */
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px 15px;
+  border: 2px solid #567C8D;
+  border-radius: 10px;
+  background-color: transparent;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #567C8D;
+}
+
+.crearcolegio-checkbox-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+.crearcolegio-checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #567C8D; 
+}
+

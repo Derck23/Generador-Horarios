@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/modal.css';
 import { useNavigate } from 'react-router-dom';
 import { registrarProfesor } from '../../services/profesorService';
+import Select from 'react-select';
 
 const RegistrarProfesor = () => {
   const [formData, setFormData] = useState({
@@ -12,9 +13,19 @@ const RegistrarProfesor = () => {
     matricula: '',
     horasRestringidas: '',
     horasTrabajo: '',
-    grupos: '',
-    materiasAsignadas: ''
+    materiasAsignadas: []
   });
+
+  const materiasDisponibles = [
+    'Matemáticas',
+    'Física',
+    'Química',
+    'Biología',
+    'Historia',
+    'Literatura',
+    'Inglés',
+    'Programación'
+  ];
 
   const navigate = useNavigate();
 
@@ -23,7 +34,6 @@ const RegistrarProfesor = () => {
     try {
       await registrarProfesor({
         ...formData,
-        grupos: formData.grupos.split(',').map(g => g.trim()),
         materiasAsignadas: formData.materiasAsignadas.split(',').map(m => m.trim())
       });
       navigate('/Profesor');
@@ -34,6 +44,17 @@ const RegistrarProfesor = () => {
 
   const handleCancel = () => {
     window.location.href = '/Profesor';
+  };
+
+  const handleMateriasChange = (e) => {
+    const options = e.target.options;
+    const selectedMaterias = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedMaterias.push(options[i].value);
+      }
+    }
+    setFormData({ ...formData, materiasAsignadas: selectedMaterias });
   };
 
   return (
@@ -98,24 +119,29 @@ const RegistrarProfesor = () => {
             className="crearcolegio-input"
             required
           />
-          <label className="crearcolegio-label">Grupos (separados por coma)</label>
-          <input
-            type="text"
-            value={formData.grupos}
-            placeholder="Ej. 1A, 2B"
-            onChange={e => setFormData({ ...formData, grupos: e.target.value })}
-            className="crearcolegio-input"
-            required
-          />
-          <label className="crearcolegio-label">Materias Asignadas (separadas por coma)</label>
-          <input
-            type="text"
-            value={formData.materiasAsignadas}
-            placeholder="Ej. Matemáticas, Física"
-            onChange={e => setFormData({ ...formData, materiasAsignadas: e.target.value })}
-            className="crearcolegio-input"
-            required
-          />
+          <label className="crearcolegio-label">Materias Asignadas</label>
+<div className="crearcolegio-input crearcolegio-checkbox-list">
+  {materiasDisponibles.map((materia, index) => (
+    <div key={index} className="crearcolegio-checkbox-item">
+      <span>{materia}</span>
+      <input
+        type="checkbox"
+        value={materia}
+        checked={formData.materiasAsignadas.includes(materia)}
+        onChange={(e) => {
+          const { checked, value } = e.target;
+          setFormData((prev) => {
+            const materias = checked
+              ? [...prev.materiasAsignadas, value]
+              : prev.materiasAsignadas.filter((m) => m !== value);
+            return { ...prev, materiasAsignadas: materias };
+          });
+        }}
+      />
+    </div>
+  ))}
+</div>
+
           <button type="submit" className="crearcolegio-btn">
             Guardar
           </button>

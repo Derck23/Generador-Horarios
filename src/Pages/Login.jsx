@@ -55,11 +55,6 @@ const Login = () => {
           <button type="submit">Iniciar Sesión</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
-          <div className="login-content">
-          <p className="register-text">
-            ¿No tienes cuenta? <Link to="/registrar-usuario">Registrarme</Link>
-          </p>
-        </div>
         </div>
         <div className="login-right">
           <img src={agenda} alt="Ilustración" className="login-image" />
