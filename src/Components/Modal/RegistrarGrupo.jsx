@@ -6,13 +6,13 @@ const niveles = [
   { value: '', label: 'Selecciona un nivel' },
   { value: 'Primaria', label: 'Primaria' },
   { value: 'Secundaria', label: 'Secundaria' },
-  { value: 'Preparatoria', label: 'Prepa' }
+  { value: 'Preparatoria', label: 'Preparatoria' }
 ];
 
 const gradosPorNivel = {
   Primaria: ['1ro', '2do', '3ro', '4to', '5to', '6to'],
   Secundaria: ['1ro', '2do', '3ro'],
-  Prepa: ['1sem', '2sem', '3sem', '4sem', '5sem', '6sem']
+  Preparatoria: ['1 semestre', '2 semestre', '3 semestre', '4 semestre', '5 semestre', '6 semestre']
 };
 
 const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
