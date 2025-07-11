@@ -50,6 +50,7 @@ const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
   };
 
   return (
+    <div className="modal-overlay">
     <div className="crearcolegio-container">
       <div className="crearcolegio-card">
         <h2 className="crearcolegio-title">Agregar grupo</h2>
@@ -105,6 +106,7 @@ const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

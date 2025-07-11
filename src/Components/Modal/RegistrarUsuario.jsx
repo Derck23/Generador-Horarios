@@ -46,10 +46,11 @@ const RegistrarUsuario = () => {
 
   const handleCancel = () => {
     console.log('cancelar');
-    window.location.href = '/';
+    window.location.href = '/home';
 };
 
   return (
+    <div className="modal-overlay">
     <div className="crearcolegio-container">
       <div className="crearcolegio-card">
         <h2 className="crearcolegio-title">Agregar usuario</h2>
@@ -193,6 +194,7 @@ const RegistrarUsuario = () => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

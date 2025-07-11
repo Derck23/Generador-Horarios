@@ -25,6 +25,7 @@ const RegistrarMateria = ({ onClose, onMateriaAgregada }) => {
   };
 
   return (
+    <div className="modal-overlay">
     <div className="crearcolegio-container">
       <div className="crearcolegio-card" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
         <h2 className="crearcolegio-title">Agregar materia</h2>
@@ -61,6 +62,7 @@ const RegistrarMateria = ({ onClose, onMateriaAgregada }) => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

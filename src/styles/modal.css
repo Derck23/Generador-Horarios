@@ -7,11 +7,26 @@
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
 
 .crearcolegio-card {
   background-color: white;
@@ -23,7 +38,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 90vh;      /* Limita la altura máxima */
+  max-height: 90vh;      
   overflow-y: auto; 
 }
 
@@ -115,14 +130,40 @@
   flex-direction: column;
 }
 
-/* Responsive para móviles */
-@media (max-width: 600px) {
+.crearcolegio-checkbox-list {
+  max-height: 200px;  
+  overflow-y: auto;   
+  padding-right: 5px; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.crearcolegio-checkbox-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: rgba(86, 124, 141, 0.05);
+  font-size: 16px;
+  color: #2F4156;
+  font-weight: 500;
+}
+
+
+
+/* Teléfonos pequeños (hasta 480px) */
+@media (max-width: 480px) {
   .crearcolegio-card {
-    padding: 25px;
+    padding: 20px;
+    max-width: 100%;
+    font-size: 14px;
   }
 
   .crearcolegio-title {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .crearcolegio-input {
@@ -133,10 +174,24 @@
   .crearcolegio-btn {
     font-size: 14px;
     padding: 10px 20px;
+    max-width: 100%;
   }
 
   .crearcolegio-cancelar {
     font-size: 13px;
+  }
+
+  .crearcolegio-form {
+    padding: 0 10px;
+  }
+
+  .crearcolegio-checkbox-list {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .crearcolegio-checkbox-item {
+    font-size: 14px;
   }
 
   .crearcolegio-row {
@@ -145,45 +200,81 @@
   }
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.4);
-  z-index: 2000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-y: auto;
+/* Tablets (481px a 768px) */
+@media (max-width: 768px) {
+  .crearcolegio-card {
+    padding: 30px;
+    width: 90%;
+  }
+
+  .crearcolegio-title {
+    font-size: 22px;
+  }
+
+  .crearcolegio-input {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+
+  .crearcolegio-btn {
+    font-size: 15px;
+    padding: 11px 24px;
+    max-width: 100%;
+  }
+
+  .crearcolegio-form {
+    padding: 0 20px;
+  }
+
+  .crearcolegio-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .crearcolegio-checkbox-list {
+    max-height: 150px; /* evita que crezca demasiado */
+    overflow-y: auto;  /* permite scroll interno */
+    padding-right: 5px;
+  }
+
+  .crearcolegio-checkbox-item {
+    flex-wrap: wrap; /* si es necesario */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .crearcolegio-checkbox-item span {
+    flex: 1;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .crearcolegio-checkbox-item input[type="checkbox"] {
+    margin-left: 10px;
+    transform: scale(1.2); /* mejora visibilidad en móvil */
+  }
 }
 
-.crearcolegio-checkbox-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* Espacio entre cada materia */
-  max-height: 200px;
-  overflow-y: auto;
-  padding: 10px 15px;
-  border: 2px solid #567C8D;
-  border-radius: 10px;
-  background-color: transparent;
-  margin-bottom: 30px;
-  font-size: 16px;
-  color: #567C8D;
-}
+/* Laptops o pantallas medianas (769px a 1024px) */
+@media (max-width: 1024px) {
+  .crearcolegio-card {
+    width: 95%;
+    padding: 35px;
+  }
 
-.crearcolegio-checkbox-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-}
+  .crearcolegio-form {
+    padding: 0 30px;
+  }
 
-.crearcolegio-checkbox-item input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #567C8D; 
-}
+  .crearcolegio-btn {
+    max-width: 100%;
+  }
 
+  .crearcolegio-input {
+    max-width: 100%;
+  }
+
+  .crearcolegio-checkbox-list {
+    max-width: 100%;
+  }
+}

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../../styles/modal.css';
 import { useNavigate } from 'react-router-dom';
 import { registrarProfesor } from '../../services/profesorService';
-import Select from 'react-select';
 
 const RegistrarProfesor = () => {
   const [formData, setFormData] = useState({
@@ -58,8 +57,9 @@ const RegistrarProfesor = () => {
   };
 
   return (
-    <div className="crearcolegio-container">
-      <div className="crearcolegio-card">
+    <div className="modal-overlay">
+      <div className="crearcolegio-container">
+        <div className="crearcolegio-card">
         <h2 className="crearcolegio-title">Registrar Profesor</h2>
         <form className="crearcolegio-form" onSubmit={handleSubmit}>
           <label className="crearcolegio-label">Apellido Paterno</label>
@@ -120,28 +120,27 @@ const RegistrarProfesor = () => {
             required
           />
           <label className="crearcolegio-label">Materias Asignadas</label>
-<div className="crearcolegio-input crearcolegio-checkbox-list">
-  {materiasDisponibles.map((materia, index) => (
-    <div key={index} className="crearcolegio-checkbox-item">
-      <span>{materia}</span>
-      <input
-        type="checkbox"
-        value={materia}
-        checked={formData.materiasAsignadas.includes(materia)}
-        onChange={(e) => {
-          const { checked, value } = e.target;
-          setFormData((prev) => {
-            const materias = checked
+          <div className="crearcolegio-checkbox-list">
+          {materiasDisponibles.map((materia, index) => (
+          <label key={index} className="crearcolegio-checkbox-item">
+          <span>{materia}</span>
+          <input
+            type="checkbox"
+            value={materia}
+            checked={formData.materiasAsignadas.includes(materia)}
+            onChange={(e) => {
+            const { checked, value } = e.target;
+            setFormData((prev) => {
+              const materias = checked
               ? [...prev.materiasAsignadas, value]
               : prev.materiasAsignadas.filter((m) => m !== value);
-            return { ...prev, materiasAsignadas: materias };
-          });
-        }}
-      />
-    </div>
-  ))}
-</div>
-
+              return { ...prev, materiasAsignadas: materias };
+              });
+            }}
+          />
+          </label>
+          ))}
+          </div>
           <button type="submit" className="crearcolegio-btn">
             Guardar
           </button>
@@ -150,6 +149,7 @@ const RegistrarProfesor = () => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };
