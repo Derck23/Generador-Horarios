@@ -19,8 +19,8 @@ const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
   const [formData, setFormData] = useState({
     nombreGrupo: '',
     nivel: '',
-    grado: '',
-    idColegio: ''
+    grado: ''
+    //idColegio: ''
   });
   const [loading, setLoading] = useState(false);
 
@@ -90,14 +90,14 @@ const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
               </select>
             </>
           )}
-          <label className="crearcolegio-label">ID Colegio</label>
+          {/* <label className="crearcolegio-label">ID Colegio</label>
           <input
             type="text"
             value={formData.idColegio}
             onChange={e => setFormData({ ...formData, idColegio: e.target.value })}
             className="crearcolegio-input"
             required
-          />
+          /> */}
           <button type="submit" className="crearcolegio-btn" disabled={loading}>
             {loading ? 'Guardando...' : 'Guardar'}
           </button>
