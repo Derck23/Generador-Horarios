@@ -32,6 +32,7 @@ const CrearColegio = () => {
 };
 
   return (
+    <div className="modal-overlay">
     <div className="crearcolegio-container">
       <div className="crearcolegio-card">
         <h2 className="crearcolegio-title">Agregar colegio</h2>
@@ -72,27 +73,27 @@ const CrearColegio = () => {
             className="crearcolegio-input"
             required
           />
-          <label htmlFor="telefono" className="crearcolegio-label">
-            Teléfono
+          <label htmlFor="plantel" className="crearcolegio-label">
+            Plantel
           </label>
           <input
-            id="telefono"
-            type="tel"
-            value={formData.telefono}
-            placeholder="Ej. 123-456-7890"
-            onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+            id="plantel"
+            type="text"
+            value={formData.plantel}
+            placeholder="Plantel"
+            onChange={(e) => setFormData({ ...formData, plantel: e.target.value })}
             className="crearcolegio-input"
             required
           />
-          <label htmlFor="email" className="crearcolegio-label">
-            Correo electrónico
+          <label htmlFor="nivel" className="crearcolegio-label">
+            Nivel
           </label>
           <input
-            id="email"
-            type="email"
-            value={formData.email}
-            placeholder="Ej. correo@ejemplo.com"
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            id="nivel"
+            type="text"
+            value={formData.nivel}
+            placeholder="Ej. Secundaria"
+            onChange={(e) => setFormData({ ...formData, nivel: e.target.value })}
             className="crearcolegio-input"
             required
           />
@@ -104,6 +105,7 @@ const CrearColegio = () => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };
