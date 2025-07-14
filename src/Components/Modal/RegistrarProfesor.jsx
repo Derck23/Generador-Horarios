@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/modal.css';
 import { useNavigate } from 'react-router-dom';
 import { registrarProfesor } from '../../services/profesorService';
+import { obtenerMaterias } from '../../services/colegioService'; // <-- Importa el servicio
+
 
 const RegistrarProfesor = () => {
   const [formData, setFormData] = useState({
@@ -14,17 +16,27 @@ const RegistrarProfesor = () => {
     horasTrabajo: '',
     materiasAsignadas: []
   });
+  const [materias, setMaterias] = useState([]);
 
-  const materiasDisponibles = [
-    'Matemáticas',
-    'Física',
-    'Química',
-    'Biología',
-    'Historia',
-    'Literatura',
-    'Inglés',
-    'Programación'
-  ];
+  useEffect(() => {
+      const fetchMaterias = async () => {
+        try {
+          const data = await obtenerMaterias();
+          setMaterias(data);
+        } catch (error) {
+          console.error("Error al obtener materias:", error);
+          setMaterias([]);
+        }
+      };
+      fetchMaterias();
+    }, []);
+
+// Mostrar nombreMateria en los checkboxes
+const materiasDisponibles = materias.map(m => ({
+  id: m.id,
+  nombre: m.nombreMateria
+}));
+    
 
   const navigate = useNavigate();
 
@@ -121,26 +133,26 @@ const RegistrarProfesor = () => {
           />
           <label className="crearcolegio-label">Materias Asignadas</label>
           <div className="crearcolegio-checkbox-list">
-          {materiasDisponibles.map((materia, index) => (
-          <label key={index} className="crearcolegio-checkbox-item">
-          <span>{materia}</span>
-          <input
-            type="checkbox"
-            value={materia}
-            checked={formData.materiasAsignadas.includes(materia)}
-            onChange={(e) => {
-            const { checked, value } = e.target;
-            setFormData((prev) => {
-              const materias = checked
+  {materiasDisponibles.map((materia) => (
+    <label key={materia.id} className="crearcolegio-checkbox-item">
+      <span>{materia.nombre}</span>
+      <input
+        type="checkbox"
+        value={materia.nombre}
+        checked={formData.materiasAsignadas.includes(materia.nombre)}
+        onChange={(e) => {
+          const { checked, value } = e.target;
+          setFormData((prev) => {
+            const materias = checked
               ? [...prev.materiasAsignadas, value]
               : prev.materiasAsignadas.filter((m) => m !== value);
-              return { ...prev, materiasAsignadas: materias };
-              });
-            }}
-          />
-          </label>
-          ))}
-          </div>
+            return { ...prev, materiasAsignadas: materias };
+          });
+        }}
+      />
+    </label>
+  ))}
+</div>
           <button type="submit" className="crearcolegio-btn">
             Guardar
           </button>

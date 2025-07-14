@@ -34,7 +34,11 @@ const Horario = () => {
               onChange={(e) => setBuscar(e.target.value)}
             />
             <FiSearch className="horarios-icono-buscar" onClick={handleBuscar} />
+            
           </div>
+          <button className="profesores-boton">
+            <span>＋</span> Crear horario
+          </button>
         </div>
 
         <table className="horarios-tabla">
