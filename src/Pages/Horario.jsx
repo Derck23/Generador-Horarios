@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import '../styles/horario.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
-import GenerarHorario from '../Components/Modal/GenerarHorario'; // Importa la modal
-
-const horarios = [
-  { id: 1, grupo: '3 A', fecha: '02/05/2025', turno: 'Matutino' }
-];
+import GenerarHorario from '../Components/Modal/GenerarHorario';
+import { getHorarios } from '../services/horario'; // Asegúrate de importar el servicio correcto
 
 const Horario = () => {
   const [buscar, setBuscar] = useState('');
   const [mostrarModal, setMostrarModal] = useState(false); // Estado para la modal
+  const [horarios, setHorarios] = useState([]);
+
+  useEffect(() => {
+    const fetchHorarios = async () => {
+      try {
+        const data = await getHorarios();
+        setHorarios(data); // Ajusta según la estructura de tu backend
+      } catch (error) {
+        console.error("Error al obtener horarios:", error);
+        setHorarios([]);
+      }
+    };
+    fetchHorarios();
+  }, []);
 
   const handleBuscar = () => {
+    // Lógica para buscar horarios
+    const resultados = horarios.filter(h => h.grupo.toLowerCase().includes(buscar.toLowerCase()));
+    setHorarios(resultados);
+    
   };
 
   return (
