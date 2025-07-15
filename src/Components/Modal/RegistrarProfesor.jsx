@@ -118,7 +118,7 @@ const materiasDisponibles = materias.map(m => ({
           <input
             type="text"
             value={formData.horasRestringidas}
-            placeholder="Ej. Lunes 8-10, Martes 12-14"
+            placeholder="Ej. 8-10, 12-14"
             onChange={e => setFormData({ ...formData, horasRestringidas: e.target.value })}
             className="crearcolegio-input"
             required
