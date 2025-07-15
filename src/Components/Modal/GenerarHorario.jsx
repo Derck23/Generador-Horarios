@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/modal.css';
 import { gruposPorColegio } from '../../services/colegioService';
+import { crearHorario } from '../../services/horario'; // Asegúrate de importar el servicio correcto
 
 const GenerarHorario = ({ onClose, onHorarioCreado }) => {
   const [grupos, setGrupos] = useState([]);
@@ -23,9 +24,15 @@ const GenerarHorario = ({ onClose, onHorarioCreado }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    if (onHorarioCreado) onHorarioCreado();
-    setLoading(false);
+
+    try {
+      await crearHorario({ grupoId: grupoSeleccionado });
+      if (onHorarioCreado) onHorarioCreado();
+    } catch (error) {
+      console.error("Error al crear horario:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCancel = () => {
