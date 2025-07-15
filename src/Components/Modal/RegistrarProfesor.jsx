@@ -45,7 +45,7 @@ const materiasDisponibles = materias.map(m => ({
     try {
       await registrarProfesor({
         ...formData,
-        materiasAsignadas: formData.materiasAsignadas.split(',').map(m => m.trim())
+        materiasAsignadas: formData.materiasAsignadas
       });
       navigate('/Profesor');
     } catch (error) {
@@ -133,25 +133,25 @@ const materiasDisponibles = materias.map(m => ({
           />
           <label className="crearcolegio-label">Materias Asignadas</label>
           <div className="crearcolegio-checkbox-list">
-  {materiasDisponibles.map((materia) => (
-    <label key={materia.id} className="crearcolegio-checkbox-item">
-      <span>{materia.nombre}</span>
-      <input
-        type="checkbox"
-        value={materia.nombre}
-        checked={formData.materiasAsignadas.includes(materia.nombre)}
-        onChange={(e) => {
-          const { checked, value } = e.target;
-          setFormData((prev) => {
-            const materias = checked
-              ? [...prev.materiasAsignadas, value]
-              : prev.materiasAsignadas.filter((m) => m !== value);
-            return { ...prev, materiasAsignadas: materias };
-          });
-        }}
-      />
-    </label>
-  ))}
+          {materiasDisponibles.map((materia) => (
+            <label key={materia.id} className="crearcolegio-checkbox-item">
+              <span>{materia.nombre}</span>
+              <input
+                type="checkbox"
+                value={materia.id}
+                checked={formData.materiasAsignadas.includes(materia.id)}
+                onChange={(e) => {
+                  const { checked, value } = e.target;
+                  setFormData((prev) => {
+                    const materias = checked
+                      ? [...prev.materiasAsignadas, value]
+                      : prev.materiasAsignadas.filter((m) => m !== value);
+                    return { ...prev, materiasAsignadas: materias };
+                  });
+                }}
+              />
+            </label>
+          ))}
 </div>
           <button type="submit" className="crearcolegio-btn">
             Guardar
