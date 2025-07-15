@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import '../styles/horario.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
+import GenerarHorario from '../Components/Modal/GenerarHorario'; // Importa la modal
 
 const horarios = [
   { id: 1, grupo: '3 A', fecha: '02/05/2025', turno: 'Matutino' },
@@ -16,6 +17,7 @@ const horarios = [
 
 const Horario = () => {
   const [buscar, setBuscar] = useState('');
+  const [mostrarModal, setMostrarModal] = useState(false); // Estado para la modal
 
   const handleBuscar = () => {
   };
@@ -34,9 +36,11 @@ const Horario = () => {
               onChange={(e) => setBuscar(e.target.value)}
             />
             <FiSearch className="horarios-icono-buscar" onClick={handleBuscar} />
-            
           </div>
-          <button className="profesores-boton">
+          <button
+            className="profesores-boton"
+            onClick={() => setMostrarModal(true)} // Abrir modal al hacer click
+          >
             <span>＋</span> Crear horario
           </button>
         </div>
@@ -70,6 +74,12 @@ const Horario = () => {
           </tbody>
         </table>
       </main>
+      {mostrarModal && (
+        <GenerarHorario
+          onClose={() => setMostrarModal(false)}
+          onHorarioCreado={() => setMostrarModal(false)}
+        />
+      )}
       <Footer />
     </div>
   );
