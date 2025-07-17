@@ -5,6 +5,7 @@ import '../styles/horario.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import GenerarHorario from '../Components/Modal/GenerarHorario';
 import { getHorarios } from '../services/horario';
+import HorarioTable from '../Components/Modal/HorarioTable';
 
 const Horario = () => {
   const [buscar, setBuscar] = useState('');
@@ -88,6 +89,7 @@ const Horario = () => {
         </table>
 
         {/* Modal o sección para mostrar el horario completo */}
+        {/* 
         {horarioSeleccionado && (
           <div className="modal-overlay">
             <div className="crearcolegio-container">
@@ -126,6 +128,25 @@ const Horario = () => {
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+        */}
+
+        {/* Usar HorarioTable para mostrar el horario seleccionado */}
+        {horarioSeleccionado && (
+          <div className="modal-overlay">
+            <div className="modal-horario-container">
+              <HorarioTable
+                horario={horarioSeleccionado.horario}
+                grupo={horarioSeleccionado.grupo}
+              />
+              <button 
+                className="modal-close-btn" 
+                onClick={handleCerrarHorario}
+              >
+                Cerrar
+              </button>
             </div>
           </div>
         )}

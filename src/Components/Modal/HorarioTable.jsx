@@ -9,6 +9,26 @@ const descargarPDF = (grupo) => {
   html2pdf().from(element).save(`horario-${grupo}.pdf`);
 };
 
+const renderCeldaHorario = (contenido) => {
+  if (!contenido) return "-";
+  
+  if (contenido === "RECESO") {
+    return <span style={{ color: 'orange', fontWeight: 'bold' }}>RECESO</span>;
+  }
+  
+  if (typeof contenido === 'object') {
+    return (
+      <div>
+        <b>{contenido.materiaNombre}</b>
+        <br />
+        <span style={{ fontSize: '0.9em' }}>{contenido.profesorNombre}</span>
+      </div>
+    );
+  }
+  
+  return contenido;
+};
+
 export const HorarioTable = ({ horario, grupo }) => {
   return (
     <div className="horario-container">
@@ -27,7 +47,7 @@ export const HorarioTable = ({ horario, grupo }) => {
                 <td>{hora}</td>
                 {DIAS.map(dia => (
                   <td key={dia + hora}>
-                    {horario[dia]?.[idx] || "-"}
+                    {renderCeldaHorario(horario[dia]?.[idx])}
                   </td>
                 ))}
               </tr>
@@ -41,4 +61,5 @@ export const HorarioTable = ({ horario, grupo }) => {
     </div>
   );
 };
+
 export default HorarioTable;

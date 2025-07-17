@@ -106,4 +106,56 @@
     height: 22px;
     cursor: pointer;
   }
-  
+  /* Estilos para el modal y botón de cierre */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(47, 65, 86, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-horario-container {
+  position: relative;
+  background: #C8D9E6;
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(47, 65, 86, 0.2);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  background: #6b8ca2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 100px;
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: #2F4156;
+  transform: rotate(90deg);
+}
+
+.modal-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
