@@ -19,3 +19,9 @@ export const getHorarios = async () => {
     throw error;
   }
 };
+
+export const obtenerHorario = async (grupoId) => {
+  const res = await fetch(`/api/horario/${grupoId}`);
+  if (!res.ok) throw new Error("No se pudo obtener el horario");
+  return await res.json();
+};

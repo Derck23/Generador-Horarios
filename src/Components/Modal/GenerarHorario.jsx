@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/modal.css';
 import { gruposPorColegio } from '../../services/colegioService';
-import { crearHorario } from '../../services/horario'; // Asegúrate de importar el servicio correcto
+import { crearHorario, obtenerHorario } from '../../services/horario'; // Asegúrate de importar el servicio correcto
+import HorarioTable from './HorarioTable';
 
 const GenerarHorario = ({ onClose, onHorarioCreado }) => {
   const [grupos, setGrupos] = useState([]);
   const [grupoSeleccionado, setGrupoSeleccionado] = useState('');
   const [loading, setLoading] = useState(false);
+  const [horario, setHorario] = useState(null);
 
   useEffect(() => {
     const fetchGrupos = async () => {
@@ -26,13 +28,11 @@ const GenerarHorario = ({ onClose, onHorarioCreado }) => {
     setLoading(true);
 
     try {
-        console.log("Grupo seleccionado:", grupoSeleccionado);
-        console.log("Datos del horario:", { grupoId: grupoSeleccionado });
       await crearHorario({ grupoId: grupoSeleccionado });
-      if (onHorarioCreado) onHorarioCreado();
-        onClose();
-    } catch (error) {
-      console.error("Error al crear horario:", error);
+
+      const data = await obtenerHorario(grupoSeleccionado);
+      setHorario(data); 
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,6 @@ const GenerarHorario = ({ onClose, onHorarioCreado }) => {
                 </option>
               ))}
             </select>
-            {/* Aquí puedes agregar más campos para definir el horario */}
             <button type="submit" className="crearcolegio-btn" disabled={loading || !grupoSeleccionado}>
               {loading ? 'Generando...' : 'Generar horario'}
             </button>
