@@ -2,7 +2,7 @@ import '../../styles/horarioTable.css';
 import html2pdf from 'html2pdf.js';
 
 const DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes"];
-const HORAS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00"];
+const HORAS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"];
 
 const descargarPDF = (grupo) => {
   const element = document.querySelector(".horario-container");
