@@ -5,6 +5,7 @@ import logo from '../assets/logohorarios_1.png';
 import agenda from '../assets/calendar.png';
 import { Link} from 'react-router-dom';
 import { login } from '../services/authService';
+import { parseJwt } from '../services/jwt';
 
 const Login = () => {
 
@@ -20,9 +21,8 @@ const Login = () => {
     setError('');
     try {
       console.log('Intentando iniciar sesión con:', form);
-      const data = await login({ username: form.username, password: form.password });
+      await login({ username: form.username, password: form.password });
       
-      localStorage.setItem('token', data.token); // guardar token
       // redirigir a dashboard o home
       window.location.href = '/home';
     } catch (err) {

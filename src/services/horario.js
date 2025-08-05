@@ -21,7 +21,28 @@ export const getHorarios = async () => {
 };
 
 export const obtenerHorario = async (grupoId) => {
-  const res = await fetch(`/api/horario/${grupoId}`);
+  const res = await api.get(`/horario/${grupoId}`);
   if (!res.ok) throw new Error("No se pudo obtener el horario");
   return await res.json();
 };
+
+export const obtenerHorarioProfesor = async () => {
+  const token = localStorage.getItem("token");
+  const res = await api.get(`/horario/profesor`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const text = await res.text();  // Lee el texto completo (sin parsear)
+  console.log("Respuesta cruda de obtenerHorarioProfesor:", text);
+
+  if (!res.ok) {
+    throw new Error("No se pudo obtener el horario del profesor");
+  }
+
+  const data = JSON.parse(text);  // Ahora parsea a JSON
+  console.log("Horario del profesor recibido:", data);
+  return data;
+}
+

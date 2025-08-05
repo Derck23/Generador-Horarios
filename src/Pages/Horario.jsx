@@ -4,7 +4,7 @@ import Footer from '../Components/Footer';
 import '../styles/horario.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import GenerarHorario from '../Components/Modal/GenerarHorario';
-import { getHorarios } from '../services/horario';
+import { getHorarios, obtenerHorarioProfesor } from '../services/horario';
 import HorarioTable from '../Components/Modal/HorarioTable';
 
 const Horario = () => {
@@ -15,10 +15,23 @@ const Horario = () => {
 
   useEffect(() => {
     const fetchHorarios = async () => {
+      console.log("useEffect ejecutado");
       try {
-        const res = await getHorarios();
-        setHorarios(res.data); // Ajusta aquí según tu backend
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) return;
+        console.log("User desde localStorage:", user);
+        let res;
+        if (user?.rol === "maestro") {
+          console.log("El usuario es maestro, llamando obtenerHorarioProfesor...");
+          res = await obtenerHorarioProfesor(user.id);
+          console.log("Respuesta obtenerHorarioProfesor:", res);
+          setHorarios(res.data);
+        } else {
+          res = await getHorarios();
+          setHorarios(res.data);
+        }
       } catch (error) {
+        console.error(error);
         setHorarios([]);
       }
     };
@@ -31,6 +44,7 @@ const Horario = () => {
   };
 
   const handleVerHorario = (horario) => {
+    console.log("Horario seleccionado:", horario);
     setHorarioSeleccionado(horario);
   };
 

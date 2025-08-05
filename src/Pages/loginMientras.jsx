@@ -22,7 +22,7 @@ const Login = () => {
       
       localStorage.setItem('token', data.token); // guardar token
       // redirigir a dashboard o home
-      window.location.href = '/home';
+      //window.location.href = '/home';
     } catch (err) {
       setError(err.message || 'Error al iniciar sesión');
     }

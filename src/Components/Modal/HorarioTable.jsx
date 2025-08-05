@@ -9,27 +9,26 @@ const descargarPDF = (grupo) => {
   html2pdf().from(element).save(`horario-${grupo}.pdf`);
 };
 
-const renderCeldaHorario = (contenido) => {
-  if (!contenido) return "-";
-  
-  if (contenido === "RECESO") {
+const renderCeldaHorario = (clase) => {
+  if (!clase) return <span>---</span>;  // Sin clase en esa hora
+
+  if (clase === "RECESO") {
     return <span style={{ color: 'orange', fontWeight: 'bold' }}>RECESO</span>;
   }
-  
-  if (typeof contenido === 'object') {
+
+  if (typeof clase === 'object') {
     return (
       <div>
-        <b>{contenido.materiaNombre}</b>
-        <br />
-        <span style={{ fontSize: '0.9em' }}>{contenido.profesorNombre}</span>
+        <b>{clase.materiaNombre}</b><br />
+        <small>{clase.profesorNombre}</small>
       </div>
     );
   }
-  
-  return contenido;
+
+  return <span>{clase}</span>; // Cualquier otro caso
 };
 
-export const HorarioTable = ({ horario, grupo }) => {
+const HorarioTable = ({ horario, grupo }) => {
   return (
     <div className="horario-container">
       <h2 className="horario-titulo">Horario del grupo {grupo}</h2>
@@ -38,18 +37,26 @@ export const HorarioTable = ({ horario, grupo }) => {
           <thead>
             <tr>
               <th>Hora</th>
-              {DIAS.map(dia => <th key={dia}>{dia}</th>)}
+              {DIAS.map(dia => (
+                <th key={dia}>{dia.charAt(0).toUpperCase() + dia.slice(1)}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {HORAS.map((hora, idx) => (
+            {HORAS.map((hora, index) => (
               <tr key={hora}>
                 <td>{hora}</td>
-                {DIAS.map(dia => (
-                  <td key={dia + hora}>
-                    {renderCeldaHorario(horario[dia]?.[idx])}
-                  </td>
-                ))}
+                {DIAS.map(dia => {
+                  // Extraer clase correspondiente a la hora 'index' del día 'dia'
+                  // Puede que no exista el día o la hora
+                  const clasesDia = horario[dia] || [];
+                  const clase = clasesDia[index] || null;
+                  return (
+                    <td key={dia + hora}>
+                      {renderCeldaHorario(clase)}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
