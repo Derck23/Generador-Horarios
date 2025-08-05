@@ -31,8 +31,10 @@ const GenerarHorario = ({ onClose, onHorarioCreado }) => {
       await crearHorario({ grupoId: grupoSeleccionado });
 
       const data = await obtenerHorario(grupoSeleccionado);
-      setHorario(data); 
+      setHorario(data);
+    } catch (error) {
       console.error("Error:", error);
+      setHorario(null);
     } finally {
       setLoading(false);
     }
