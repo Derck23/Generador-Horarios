@@ -22,7 +22,7 @@ const Login = () => {
       console.log('Intentando iniciar sesión con:', form);
       const data = await login({ username: form.username, password: form.password });
       
-      localStorage.setItem('token', data.token); // guardar token
+      localStorage.setItem('token', data.data.token); // guardar token
       // redirigir a dashboard o home
       window.location.href = '/home';
     } catch (err) {
