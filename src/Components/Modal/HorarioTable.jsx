@@ -37,20 +37,20 @@ export const HorarioTable = ({ horario, grupo, horarioProfesor = null }) => {
   console.log("HorarioTable - horario recibido:", horario);
   console.log("HorarioTable - horarioProfesor recibido:", horarioProfesor);
 
-  // Función para verificar si una celda específica pertenece al profesor
+
   const esCeldaDelProfesor = (dia, horaIndex) => {
     if (!horarioProfesor) return false;
     
     const materiasDelDia = horarioProfesor[dia];
     if (!materiasDelDia || !Array.isArray(materiasDelDia)) return false;
     
-    // Buscar si alguna materia del profesor está en este índice de hora
+
     return materiasDelDia.some(materia => 
       materia && typeof materia === 'object' && materia.indiceHora === horaIndex
     );
   };
 
-  // Función para obtener la materia del profesor en una hora específica
+
   const getMateriaProfesorEnHora = (dia, horaIndex) => {
     if (!horarioProfesor) return null;
     
@@ -62,25 +62,24 @@ export const HorarioTable = ({ horario, grupo, horarioProfesor = null }) => {
     );
   };
 
-  // Función para obtener el contenido de la celda
+
   const getContenidoCelda = (dia, horaIndex) => {
-    // Si hay horario del profesor, solo mostrar sus materias
+
     if (horarioProfesor) {
       const esDelProfesor = esCeldaDelProfesor(dia, horaIndex);
       if (esDelProfesor) {
         return getMateriaProfesorEnHora(dia, horaIndex);
       } else {
-        // Verificar si es RECESO en el horario general
+
         const celdaGeneral = horario[dia]?.[horaIndex];
         if (celdaGeneral === "RECESO") {
           return "RECESO";
         }
-        // Para cualquier otra cosa (materias de otros profesores), mostrar vacío
+ 
         return null;
       }
     }
     
-    // Si no hay horario del profesor, mostrar el horario completo (modo admin)
     return horario[dia]?.[horaIndex];
   };
 
@@ -119,7 +118,6 @@ export const HorarioTable = ({ horario, grupo, horarioProfesor = null }) => {
           </thead>
           <tbody>
             {HORAS.map((hora, idx) => {
-              // Verificar si el profesor tiene clase en esta hora
               const profesorTieneClaseEnEstaHora = horarioProfesor && 
                 DIAS.some(dia => esCeldaDelProfesor(dia, idx));
 
