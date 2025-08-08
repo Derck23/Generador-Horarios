@@ -20,9 +20,8 @@ const Horario = () => {
       console.log("useEffect ejecutado");
       try {
         const user = JSON.parse(localStorage.getItem("user"));
-        if (!user) return;
-        console.log("User desde localStorage:", user);
-        
+        console.log("Usuario desde localStorage:", user);
+        if (!user) return;        
         if (user?.rol === "maestro") {
           console.log("El usuario es maestro, llamando obtenerHorarioProfesor...");
           setEsProfesor(true);
