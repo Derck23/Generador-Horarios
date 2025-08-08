@@ -23,6 +23,7 @@ const Login = () => {
       const data = await login({ username: form.username, password: form.password });
       
       localStorage.setItem('token', data.data.token); // guardar token
+      localStorage.setItem('user', JSON.stringify(data.data.user));
       // redirigir a dashboard o home
       window.location.href = '/home';
     } catch (err) {
