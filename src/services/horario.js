@@ -47,4 +47,14 @@ export const obtenerHorarioPorProfesor = async () => {
   }
 };
 
+export const eliminarHorario = async (horarioId) => {
+  try {
+    const response = await api.delete(`/horario/eliminar/${horarioId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al eliminar horario:", error);
+    throw error;
+  }
+};
+
 

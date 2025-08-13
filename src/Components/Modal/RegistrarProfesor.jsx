@@ -5,7 +5,7 @@ import { registrarProfesor } from '../../services/profesorService';
 import { obtenerMaterias } from '../../services/colegioService'; // <-- Importa el servicio
 
 
-const RegistrarProfesor = () => {
+const RegistrarProfesor = ({ onClose, onProfesorCreado }) => {
   const [formData, setFormData] = useState({
     apellidoPaterno: '',
     apellidoMaterno: '',
@@ -47,14 +47,29 @@ const materiasDisponibles = materias.map(m => ({
         ...formData,
         materiasAsignadas: formData.materiasAsignadas
       });
-      navigate('/Profesor');
+      
+      // Llamar a la función para actualizar la vista
+      if (onProfesorCreado) {
+        onProfesorCreado();
+      }
+      
+      // Cerrar la modal
+      if (onClose) {
+        onClose();
+      } else {
+        navigate('/Profesor');
+      }
     } catch (error) {
       console.error('Error al registrar profesor:', error);
     }
   };
 
   const handleCancel = () => {
-    window.location.href = '/Profesor';
+    if (onClose) {
+      onClose();
+    } else {
+      window.location.href = '/Profesor';
+    }
   };
 
   const handleMateriasChange = (e) => {

@@ -4,26 +4,44 @@ import Footer from '../Components/Footer';
 import '../styles/profesor.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import RegistrarProfesor from '../Components/Modal/RegistrarProfesor';
-import { listarProfesores } from '../services/profesorService'; // Importa el servicio
+import { listarProfesores, eliminarProfesor } from '../services/profesorService'; // Importa el servicio
 
 const Profesor = () => {
   const [buscar, setBuscar] = useState('');
   const [mostrarModal, setMostrarModal] = useState(false);
   const [profesores, setProfesores] = useState([]); // Nuevo estado
 
+  const fetchProfesores = async () => {
+    try {
+      const data = await listarProfesores();
+      console.log("Respuesta de listarProfesores:", data);
+      setProfesores(Array.isArray(data.data) ? data.data : []);
+    } catch (error) {
+      console.error("Error al cargar los profesores:", error);
+      setProfesores([]);
+    }
+  };
+
   useEffect(() => {
-    const fetchProfesores = async () => {
-      try {
-        const data = await listarProfesores();
-        console.log("Respuesta de listarProfesores:", data);
-        setProfesores(Array.isArray(data.data) ? data.data : []);
-      } catch (error) {
-        console.error("Error al cargar los profesores:", error);
-        setProfesores([]);
-      }
-    };
     fetchProfesores();
   }, []);
+
+  const handleEliminarProfesor = async (profesorId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este profesor?')) {
+      try {
+        await eliminarProfesor(profesorId);
+        await fetchProfesores(); // Recargar lista
+        alert('Profesor eliminado exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar profesor:", error);
+        alert('Error al eliminar el profesor');
+      }
+    }
+  };
+
+  const handleProfesorCreado = async () => {
+    await fetchProfesores(); // Recargar lista cuando se crea un profesor
+  };
 
   const handleBuscar = () => {
   };
@@ -84,9 +102,25 @@ const Profesor = () => {
                 </td>
                 <td>{profesor.horas}</td>
                 <td className="profesores-acciones">
-                  <FiEye title="Ver" />
-                  <FiEdit2 title="Editar" />
-                  <FiTrash2 title="Eliminar" />
+                  {/*<button
+                    className="ver-profesor-btn"
+                    title="Ver"
+                  >
+                    <FiEye /> Ver
+                  </button>
+                  <button
+                    className="editar-profesor-btn"
+                    title="Editar"
+                  >
+                    <FiEdit2 /> Editar
+                  </button>*/}
+                  <button
+                    className="eliminar-profesor-btn"
+                    onClick={() => handleEliminarProfesor(profesor.id)}
+                    title="Eliminar"
+                  >
+                    <FiTrash2 /> Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
@@ -94,7 +128,10 @@ const Profesor = () => {
         </table>
         {mostrarModal && (
           <div className="modal-overlay">
-            <RegistrarProfesor />
+            <RegistrarProfesor 
+              onClose={() => setMostrarModal(false)}
+              onProfesorCreado={handleProfesorCreado}
+            />
             <button
               className="modal-close"
               onClick={() => setMostrarModal(false)}

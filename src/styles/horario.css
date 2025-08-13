@@ -106,6 +106,47 @@
     height: 22px;
     cursor: pointer;
   }
+
+  .ver-horario-btn,
+  .eliminar-horario-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 4px;
+  }
+
+  .ver-horario-btn {
+    background-color: #6b8ca2;
+    color: white;
+  }
+
+  .ver-horario-btn:hover {
+    background-color: #2F4156;
+    transform: translateY(-2px);
+  }
+
+  .eliminar-horario-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .eliminar-horario-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+  }
+
+  .horarios-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
   /* Estilos para el modal y botón de cierre */
 .modal-overlay {
   position: fixed;
@@ -158,4 +199,39 @@
 .modal-close-btn svg {
   width: 20px;
   height: 20px;
+}
+
+.info-profesor {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #6b8ca2;
+}
+
+.info-profesor h3 {
+  color: #2F4156;
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.info-profesor p {
+  color: #567C8D;
+  margin: 0;
+  font-size: 14px;
+}
+
+.materias-profesor-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dia-preview {
+  font-size: 12px;
+  color: #2F4156;
+  background: rgba(107, 140, 162, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
 }

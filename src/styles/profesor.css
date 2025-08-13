@@ -128,4 +128,56 @@
     height: 22px;
     cursor: pointer;
   }
+
+  .ver-profesor-btn,
+  .editar-profesor-btn,
+  .eliminar-profesor-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 3px;
+  }
+
+  .ver-profesor-btn {
+    background-color: #6b8ca2;
+    color: white;
+  }
+
+  .ver-profesor-btn:hover {
+    background-color: #2F4156;
+    transform: translateY(-2px);
+  }
+
+  .editar-profesor-btn {
+    background-color: #f39c12;
+    color: white;
+  }
+
+  .editar-profesor-btn:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+  }
+
+  .eliminar-profesor-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .eliminar-profesor-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+  }
+
+  .profesores-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
   

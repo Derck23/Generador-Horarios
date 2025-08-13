@@ -36,7 +36,16 @@ const RegistrarMateria = ({ onClose, onMateriaAgregada }) => {
     setLoading(true);
     try {
       await registrarMateria({ nombreMateria, horas, nivel, grado });
-      if (onMateriaAgregada) onMateriaAgregada();
+      
+      // Llamar a la función para actualizar la vista
+      if (onMateriaAgregada) {
+        onMateriaAgregada();
+      }
+      
+      // Cerrar la modal
+      if (onClose) {
+        onClose();
+      }
     } catch (error) {
       console.error('Error al registrar materia:', error);
       alert('Error al registrar materia');

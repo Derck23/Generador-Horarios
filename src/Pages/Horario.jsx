@@ -4,7 +4,7 @@ import Footer from '../Components/Footer';
 import '../styles/horario.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import GenerarHorario from '../Components/Modal/GenerarHorario';
-import { getHorarios, obtenerHorarioPorProfesor } from '../services/horario';
+import { getHorarios, obtenerHorarioPorProfesor, eliminarHorario } from '../services/horario';
 import HorarioTable from '../Components/Modal/HorarioTable';
 
 const Horario = () => {
@@ -15,38 +15,58 @@ const Horario = () => {
   const [esProfesor, setEsProfesor] = useState(false);
   const [horariosProfesor, setHorariosProfesor] = useState([]); // Datos específicos del profesor
 
-  useEffect(() => {
-    const fetchHorarios = async () => {
-      console.log("useEffect ejecutado");
-      try {
-        const user = JSON.parse(localStorage.getItem("user"));
-        console.log("Usuario desde localStorage:", user);
-        if (!user) return;        
-        if (user?.rol === "maestro") {
-          console.log("El usuario es maestro, llamando obtenerHorarioProfesor...");
-          setEsProfesor(true);
-          
-          // Obtener horarios específicos del profesor
-          const resProfesor = await obtenerHorarioPorProfesor(user.id);
-          console.log("Respuesta obtenerHorarioProfesor:", resProfesor);
-          setHorariosProfesor(resProfesor.data);
-          
-          // También obtener todos los horarios para mostrar la estructura completa
-          const resTodosHorarios = await getHorarios();
-          setHorarios(resTodosHorarios.data);
-        } else {
-          setEsProfesor(false);
-          const res = await getHorarios();
-          setHorarios(res.data);
-        }
-      } catch (error) {
-        console.error(error);
-        setHorarios([]);
-        setHorariosProfesor([]);
+  const fetchHorarios = async () => {
+    console.log("fetchHorarios ejecutado");
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log("Usuario desde localStorage:", user);
+      if (!user) return;        
+      if (user?.rol === "maestro") {
+        console.log("El usuario es maestro, llamando obtenerHorarioProfesor...");
+        setEsProfesor(true);
+        
+        // Obtener horarios específicos del profesor
+        const resProfesor = await obtenerHorarioPorProfesor(user.id);
+        console.log("Respuesta obtenerHorarioProfesor:", resProfesor);
+        setHorariosProfesor(resProfesor.data);
+        
+        // También obtener todos los horarios para mostrar la estructura completa
+        const resTodosHorarios = await getHorarios();
+        setHorarios(resTodosHorarios.data);
+      } else {
+        setEsProfesor(false);
+        const res = await getHorarios();
+        setHorarios(res.data);
       }
-    };
+    } catch (error) {
+      console.error(error);
+      setHorarios([]);
+      setHorariosProfesor([]);
+    }
+  };
+
+  useEffect(() => {
     fetchHorarios();
   }, []);
+
+  const handleEliminarHorario = async (horarioId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este horario?')) {
+      try {
+        await eliminarHorario(horarioId);
+        // Recargar los horarios después de eliminar
+        await fetchHorarios();
+        alert('Horario eliminado exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar horario:", error);
+        alert('Error al eliminar el horario');
+      }
+    }
+  };
+
+  const handleHorarioCreado = async () => {
+    // Recargar los horarios cuando se crea uno nuevo
+    await fetchHorarios();
+  };
 
   const handleBuscar = () => {
     const resultados = horarios.filter(h => h.grupo.toLowerCase().includes(buscar.toLowerCase()));
@@ -156,6 +176,15 @@ const Horario = () => {
                     >
                       <FiEye title="Ver horario" /> Ver horario
                     </button>
+                    {!esProfesor && (
+                      <button
+                        className="eliminar-horario-btn"
+                        onClick={() => handleEliminarHorario(h.id)}
+                        title="Eliminar horario"
+                      >
+                        <FiTrash2 /> Eliminar
+                      </button>
+                    )}
                   </td>
                 </tr>
               );
@@ -185,7 +214,7 @@ const Horario = () => {
         {mostrarModal && !esProfesor && (
           <GenerarHorario
             onClose={() => setMostrarModal(false)}
-            onHorarioCreado={() => setMostrarModal(false)}
+            onHorarioCreado={handleHorarioCreado}
           />
         )}
       </main>

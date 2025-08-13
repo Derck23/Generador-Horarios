@@ -29,3 +29,13 @@ export const asignarProfesor = async (data) => {
     throw error;
     }
 }
+
+export const eliminarProfesor = async (profesorId) => {
+  try {
+    const response = await api.delete(`/profesor/eliminar/${profesorId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al eliminar profesor:", error);
+    throw error;
+  }
+};

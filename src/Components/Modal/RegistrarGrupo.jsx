@@ -15,7 +15,7 @@ const gradosPorNivel = {
   Preparatoria: ['1 semestre', '2 semestre', '3 semestre', '4 semestre', '5 semestre', '6 semestre']
 };
 
-const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
+const RegistrarGrupo = ({ onClose, onGrupoCreado }) => {
   const [formData, setFormData] = useState({
     nombreGrupo: '',
     nivel: '',
@@ -37,7 +37,16 @@ const RegistrarGrupo = ({ onClose, onGrupoAgregado }) => {
     setLoading(true);
     try {
       await registrarGrupo(formData);
-      if (onGrupoAgregado) onGrupoAgregado();
+      
+      // Llamar a la función para actualizar la vista
+      if (onGrupoCreado) {
+        onGrupoCreado();
+      }
+      
+      // Cerrar la modal
+      if (onClose) {
+        onClose();
+      }
     } catch (error) {
       alert('Error al registrar grupo');
       console.error('Error al registrar grupo:', error);

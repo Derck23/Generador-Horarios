@@ -4,26 +4,44 @@ import Footer from '../Components/Footer';
 import '../styles/materia.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import RegistrarGrupo from '../Components/Modal/RegistrarGrupo';
-import { gruposPorColegio } from '../services/colegioService';
+import { gruposPorColegio, eliminarGrupo } from '../services/colegioService';
 
 const Grupo = () => {
   const [grupos, setGrupos] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
 
   // Cargar grupos desde el backend
+  const fetchGrupos = async () => {
+    try {
+      // Puedes pasar params si tu backend los requiere, por ejemplo: { idColegio: '...' }
+      const data = await gruposPorColegio();
+      setGrupos(data);
+    } catch (error) {
+      console.error('Error al obtener grupos:', error);
+      setGrupos([]);
+    }
+  };
+
   useEffect(() => {
-    const fetchGrupos = async () => {
-      try {
-        // Puedes pasar params si tu backend los requiere, por ejemplo: { idColegio: '...' }
-        const data = await gruposPorColegio();
-        setGrupos(data);
-      } catch (error) {
-        console.error('Error al obtener grupos:', error);
-        setGrupos([]);
-      }
-    };
     fetchGrupos();
   }, []);
+
+  const handleEliminarGrupo = async (grupoId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este grupo?')) {
+      try {
+        await eliminarGrupo(grupoId);
+        await fetchGrupos(); // Recargar lista
+        alert('Grupo eliminado exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar grupo:", error);
+        alert('Error al eliminar el grupo');
+      }
+    }
+  };
+
+  const handleGrupoCreado = async () => {
+    await fetchGrupos(); // Recargar lista cuando se crea un grupo
+  };
 
   return (
     <div className="materias-page">
@@ -56,6 +74,7 @@ const Grupo = () => {
               <th>Nivel</th>
               <th>Grado</th>
               <th>ID Colegio</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -66,11 +85,32 @@ const Grupo = () => {
                   <td>{grupo.nivel}</td>
                   <td>{grupo.grado}</td>
                   <td>{grupo.idColegio}</td>
+                  <td className="materias-acciones">
+                    {/*<button 
+                      className="ver-grupo-btn"
+                      title="Ver"
+                    >
+                      <FiEye /> Ver
+                    </button>
+                    <button 
+                      className="editar-grupo-btn"
+                      title="Editar"
+                    >
+                      <FiEdit2 /> Editar
+                    </button>*/}
+                    <button 
+                      className="eliminar-grupo-btn"
+                      onClick={() => handleEliminarGrupo(grupo.id)}
+                      title="Eliminar"
+                    >
+                      <FiTrash2 /> Eliminar
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="text-center">
+                <td colSpan="5" className="text-center">
                   No hay grupos disponibles
                 </td>
               </tr>
@@ -82,10 +122,7 @@ const Grupo = () => {
       {mostrarModal && (
         <RegistrarGrupo
           onClose={() => setMostrarModal(false)}
-          onMateriaAgregada={() => {
-            // Recargar materias después de agregar
-            setMostrarModal(false);
-          }}
+          onGrupoCreado={handleGrupoCreado}
         />
       )}
 

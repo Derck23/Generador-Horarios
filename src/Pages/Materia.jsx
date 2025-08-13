@@ -4,23 +4,24 @@ import Footer from '../Components/Footer';
 import '../styles/materia.css';
 import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import RegistrarMateria from '../Components/Modal/RegistrarMateria';
-import { obtenerMaterias } from '../services/colegioService'; // <-- Importa el servicio
+import { obtenerMaterias, eliminarMateria } from '../services/colegioService'; // <-- Importa el servicio
 
 const Materia = () => {
   const [materias, setMaterias] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
 
   // Cargar materias desde el backend
+  const fetchMaterias = async () => {
+    try {
+      const data = await obtenerMaterias();
+      setMaterias(data);
+    } catch (error) {
+      console.error("Error al obtener materias:", error);
+      setMaterias([]);
+    }
+  };
+
   useEffect(() => {
-    const fetchMaterias = async () => {
-      try {
-        const data = await obtenerMaterias();
-        setMaterias(data);
-      } catch (error) {
-        console.error("Error al obtener materias:", error);
-        setMaterias([]);
-      }
-    };
     fetchMaterias();
   }, []);
 
@@ -30,7 +31,21 @@ const Materia = () => {
   const handleEditarMateria = (materia) => {
   };
 
-  const handleEliminarMateria = (id) => {
+  const handleEliminarMateria = async (id) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar esta materia?')) {
+      try {
+        await eliminarMateria(id);
+        await fetchMaterias(); // Recargar lista
+        alert('Materia eliminada exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar materia:", error);
+        alert('Error al eliminar la materia');
+      }
+    }
+  };
+
+  const handleMateriaCreada = async () => {
+    await fetchMaterias(); // Recargar lista cuando se crea una materia
   };
 
 
@@ -86,9 +101,27 @@ const Materia = () => {
                 </td>
                 <td>{materia.horas}</td>
                 <td className="materias-acciones">
-                  <FiEye className="accion-icono" title="Ver" onClick={() => handleVerMateria(materia)} />
-                  <FiEdit2 className="accion-icono" title="Editar" onClick={() => handleEditarMateria(materia)}/>
-                  <FiTrash2 className="accion-icono" title="Eliminar" onClick={() => handleEliminarMateria(materia.id)}/>
+                  {/*<button 
+                    className="ver-materia-btn"
+                    onClick={() => handleVerMateria(materia)}
+                    title="Ver"
+                  >
+                    <FiEye /> Ver
+                  </button>
+                  <button 
+                    className="editar-materia-btn"
+                    onClick={() => handleEditarMateria(materia)}
+                    title="Editar"
+                  >
+                    <FiEdit2 /> Editar
+                  </button>*/}
+                  <button 
+                    className="eliminar-materia-btn"
+                    onClick={() => handleEliminarMateria(materia.id)}
+                    title="Eliminar"
+                  >
+                    <FiTrash2 /> Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
@@ -99,11 +132,7 @@ const Materia = () => {
       {mostrarModal && (
         <RegistrarMateria
           onClose={() => setMostrarModal(false)}
-          onMateriaAgregada={() => {
-            // Recargar materias después de agregar
-            obtenerMaterias().then(setMaterias);
-            setMostrarModal(false);
-          }}
+          onMateriaAgregada={handleMateriaCreada}
         />
       )}
 

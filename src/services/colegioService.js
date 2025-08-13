@@ -59,3 +59,23 @@ export const obtenerMaterias = async () => {
     throw error;
   }
 };
+
+export const eliminarMateria = async (materiaId) => {
+  try {
+    const response = await api.delete(`/colegio/materia/eliminar/${materiaId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al eliminar materia:", error);
+    throw error;
+  }
+};
+
+export const eliminarGrupo = async (grupoId) => {
+  try {
+    const response = await api.delete(`/colegio/grupo/eliminar/${grupoId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al eliminar grupo:", error);
+    throw error;
+  }
+};

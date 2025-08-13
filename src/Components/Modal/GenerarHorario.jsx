@@ -32,6 +32,16 @@ const GenerarHorario = ({ onClose, onHorarioCreado }) => {
 
       const data = await obtenerHorario(grupoSeleccionado);
       setHorario(data);
+      
+      // Llamar a la función para cerrar la modal y actualizar la vista
+      if (onHorarioCreado) {
+        onHorarioCreado();
+      }
+      
+      // Cerrar la modal
+      if (onClose) {
+        onClose();
+      }
     } catch (error) {
       console.error("Error:", error);
       setHorario(null);
