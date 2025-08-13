@@ -19,16 +19,16 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/Home" element={/*<ProtectedRoute>*/<HomeAdmin />/*</ProtectedRoute>*/} />
-        <Route path="/Materia" element={<Materia />} />
-        <Route path="/Horario" element={<Horario />} />
-        <Route path="/Profesor" element={<Profesor />} />
-        <Route path="/Usuario" element={<Usuario />} />
-        <Route path="/Colegio" element={<Colegio />} />
-        <Route path="/Grupo" element={<Grupo />} />
-        <Route path="/crear-colegio" element={<CrearColegio />} />
-        <Route path="/registrar-usuario" element={<RegistrarUsuario />} />
-        <Route path="/registrar-materia" element={<RegistrarMateria />} />
+        <Route path="/Home" element={<ProtectedRoute><HomeAdmin /></ProtectedRoute>} />
+        <Route path="/Materia" element={<ProtectedRoute><Materia /></ProtectedRoute>} />
+        <Route path="/Horario" element={<ProtectedRoute><Horario /></ProtectedRoute>} />
+        <Route path="/Profesor" element={<ProtectedRoute><Profesor /></ProtectedRoute>} />
+        <Route path="/Usuario" element={<ProtectedRoute><Usuario /></ProtectedRoute>} />
+        <Route path="/Colegio" element={<ProtectedRoute><Colegio /></ProtectedRoute>} />
+        <Route path="/Grupo" element={<ProtectedRoute><Grupo /></ProtectedRoute>} />
+        <Route path="/crear-colegio" element={<ProtectedRoute><CrearColegio /></ProtectedRoute>} />
+        <Route path="/registrar-usuario" element={<ProtectedRoute><RegistrarUsuario /></ProtectedRoute>} />
+        <Route path="/registrar-materia" element={<ProtectedRoute><RegistrarMateria /></ProtectedRoute>} />
       </Routes>
     </Router>
   );
