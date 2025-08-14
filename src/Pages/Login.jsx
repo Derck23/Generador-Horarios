@@ -3,11 +3,11 @@ import '../styles/global.css';
 import '../styles/login.css';
 import logo from '../assets/logohorarios_1.png';
 import agenda from '../assets/calendar.png';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 
 const Login = () => {
-
+  const navigate = useNavigate();
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
 
@@ -25,7 +25,7 @@ const Login = () => {
       localStorage.setItem('token', data.data.token); // guardar token
       localStorage.setItem('user', JSON.stringify(data.data.user));
       // redirigir a dashboard o home
-      window.location.href = '/home';
+      navigate('/Home');
     } catch (err) {
       console.error('Error de login:', err);
       setError(err.message || 'Error al iniciar sesión. Verifica tu conexión.');
