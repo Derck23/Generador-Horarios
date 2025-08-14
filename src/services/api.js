@@ -7,6 +7,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: false, // Agregamos esta línea
 });
 
 // Interceptor para agregar el token automáticamente

@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     setError('');
     try {
-      console.log('Intentando iniciar sesión con:', form);
+      console.log('Intentando iniciar sesión con usuario:', form.username);
       const data = await login({ username: form.username, password: form.password });
       
       localStorage.setItem('token', data.data.token); // guardar token
@@ -27,7 +27,8 @@ const Login = () => {
       // redirigir a dashboard o home
       window.location.href = '/home';
     } catch (err) {
-      setError(err.message || 'Error al iniciar sesión');
+      console.error('Error de login:', err);
+      setError(err.message || 'Error al iniciar sesión. Verifica tu conexión.');
     }
   };
 
