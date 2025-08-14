@@ -1,95 +1,226 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import '../styles/home.css';
+import '../styles/horario.css';
+import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
+import GenerarHorario from '../Components/Modal/GenerarHorario';
+import { getHorarios, obtenerHorarioPorProfesor, eliminarHorario } from '../services/horario';
+import HorarioTable from '../Components/Modal/HorarioTable';
 
-const horarios = [
-  { id: 1, grupo: '3 A', fecha: '02/05/2025', turno: 'Matutino' },
-  { id: 2, grupo: '1 B', fecha: '02/05/2025', turno: 'Vespertino' },
-  { id: 3, grupo: '2 A', fecha: '30/04/2025', turno: 'Matutino' },
-  { id: 4, grupo: '1 A', fecha: '29/04/2025', turno: 'Vespertino' },
-  { id: 5, grupo: '3 B', fecha: '29/04/2025', turno: 'Vespertino' },
-  { id: 6, grupo: '2 B', fecha: '01/03/2025', turno: 'Matutino' },
-  { id: 7, grupo: '1 C', fecha: '01/03/2025', turno: 'Matutino' },
-];
+const Horario = () => {
+  const [buscar, setBuscar] = useState('');
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [horarios, setHorarios] = useState([]);
+  const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
+  const [esProfesor, setEsProfesor] = useState(false);
+  const [horariosProfesor, setHorariosProfesor] = useState([]); // Datos específicos del profesor
 
-const Horario = () => (
-  <div className="home-page">
-    <Navbar active="HORARIOS" />
-    <main className="home-main" style={{ alignItems: 'flex-start', width: '100%' }}>
-      <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ margin: '32px 0 16px 0' }}>
-          <div style={{ fontSize: '1.3rem', color: '#46687c', fontWeight: 500 }}>
-            Colegio Nuevo Continente
+  const fetchHorarios = async () => {
+    console.log("fetchHorarios ejecutado");
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log("Usuario desde localStorage:", user);
+      if (!user) return;        
+      if (user?.rol === "maestro") {
+        console.log("El usuario es maestro, llamando obtenerHorarioProfesor...");
+        setEsProfesor(true);
+        
+        // Obtener horarios específicos del profesor
+        const resProfesor = await obtenerHorarioPorProfesor(user.id);
+        console.log("Respuesta obtenerHorarioProfesor:", resProfesor);
+        setHorariosProfesor(resProfesor.data);
+        
+        // También obtener todos los horarios para mostrar la estructura completa
+        const resTodosHorarios = await getHorarios();
+        setHorarios(resTodosHorarios.data);
+      } else {
+        setEsProfesor(false);
+        const res = await getHorarios();
+        setHorarios(res.data);
+      }
+    } catch (error) {
+      console.error(error);
+      setHorarios([]);
+      setHorariosProfesor([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchHorarios();
+  }, []);
+
+  const handleEliminarHorario = async (horarioId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este horario?')) {
+      try {
+        await eliminarHorario(horarioId);
+        // Recargar los horarios después de eliminar
+        await fetchHorarios();
+        alert('Horario eliminado exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar horario:", error);
+        alert('Error al eliminar el horario');
+      }
+    }
+  };
+
+  const handleHorarioCreado = async () => {
+    // Recargar los horarios cuando se crea uno nuevo
+    await fetchHorarios();
+  };
+
+  const handleBuscar = () => {
+    const resultados = horarios.filter(h => h.grupo.toLowerCase().includes(buscar.toLowerCase()));
+    setHorarios(resultados);
+  };
+
+  const handleVerHorario = (horario) => {
+    console.log("Ver horario seleccionado:", horario);
+    
+    // Si es profesor, buscar el horario específico del profesor para este grupo
+    let horarioProfesorParaGrupo = null;
+    if (esProfesor) {
+      horarioProfesorParaGrupo = horariosProfesor.find(hp => 
+        hp.grupoId === horario.horarioGrupoId || hp.grupo === horario.grupo
+      );
+      console.log("Horario del profesor para este grupo:", horarioProfesorParaGrupo);
+    }
+    
+    setHorarioSeleccionado({
+      ...horario,
+      horarioProfesor: horarioProfesorParaGrupo?.horario || null
+    });
+  };
+
+  const handleCerrarHorario = () => {
+    setHorarioSeleccionado(null);
+  };
+
+  // Filtrar horarios para mostrar solo los que tienen clases del profesor (si es profesor)
+  const horariosParaMostrar = esProfesor 
+    ? horarios.filter(h => 
+        horariosProfesor.some(hp => 
+          hp.grupoId === h.horarioGrupoId || hp.grupo === h.grupo
+        )
+      )
+    : horarios;
+
+  return (
+    <div className="horarios-page">
+      <Navbar active="HORARIOS" />
+      <main className="horarios-main">
+        <div className="horarios-controles">
+          <div className="horarios-busqueda">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={buscar}
+              onChange={(e) => setBuscar(e.target.value)}
+            />
+            <FiSearch className="horarios-icono-buscar" onClick={handleBuscar} />
           </div>
-          <div style={{ color: '#6b8ca2', fontSize: '1rem' }}>
-            Plantel Querétaro<br />
-            Nivel: Secundaria
+          {!esProfesor && (
+            <button
+              className="profesores-boton"
+              onClick={() => setMostrarModal(true)}
+            >
+              <span>＋</span> Crear horario
+            </button>
+          )}
+        </div>
+
+        {esProfesor && (
+          <div className="info-profesor">
+            <h3>Tus Horarios</h3>
+            <p>Mostrando solo los grupos donde tienes materias asignadas</p>
           </div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
-          <input
-            type="text"
-            placeholder="Buscar..."
-            style={{
-              borderRadius: 12,
-              border: 'none',
-              padding: '6px 16px',
-              outline: 'none',
-              fontSize: 14,
-              background: '#e3f0fa',
-              color: '#46687c',
-              marginRight: 8,
-            }}
-          />
-          <span style={{ fontSize: 18, color: '#6b8ca2', alignSelf: 'center' }}>🔍</span>
-        </div>
-        <table style={{
-          width: '100%',
-          background: 'white',
-          borderRadius: 10,
-          overflow: 'hidden',
-          borderCollapse: 'separate',
-          borderSpacing: 0,
-          boxShadow: '0 2px 8px rgba(100,150,180,0.07)',
-        }}>
+        )}
+
+        <table className="horarios-tabla">
           <thead>
-            <tr style={{ background: '#6b8ca2', color: '#fff', textAlign: 'left' }}>
-              <th style={{ padding: '14px 18px' }}>No. de Horario</th>
+            <tr>
+              <th>No. de Horario</th>
               <th>Grupo</th>
               <th>Fecha de creación</th>
-              <th>Turno</th>
+              {esProfesor && <th>Tus Materias</th>}
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {horarios.map(h => (
-              <tr key={h.id} style={{ borderBottom: '1px solid #b2cbe2', color: '#46687c' }}>
-                <td style={{ padding: '12px 18px' }}>{h.id}</td>
-                <td>{h.grupo}</td>
-                <td>{h.fecha}</td>
-                <td>
-                  <span style={{
-                    border: '1px solid #6b8ca2',
-                    borderRadius: 16,
-                    padding: '2px 14px',
-                    fontSize: 13,
-                    background: '#e3f0fa',
-                  }}>{h.turno}</span>
-                </td>
-                <td>
-                  <span title="Ver" style={{ marginRight: 12, cursor: 'pointer' }}>⏲️</span>
-                  <span title="Editar" style={{ marginRight: 12, cursor: 'pointer' }}>✏️</span>
-                  <span title="Eliminar" style={{ cursor: 'pointer' }}>🗑️</span>
-                </td>
-              </tr>
-            ))}
+            {horariosParaMostrar.map((h) => {
+              const horarioProfesorInfo = esProfesor 
+                ? horariosProfesor.find(hp => hp.grupoId === h.horarioGrupoId || hp.grupo === h.grupo)
+                : null;
+
+              return (
+                <tr key={h.id}>
+                  <td>{h.id}</td>
+                  <td>{h.grupo}</td>
+                  <td>{new Date(h.Creado).toLocaleString()}</td>
+                  {esProfesor && (
+                    <td>
+                      {horarioProfesorInfo && (
+                        <div className="materias-profesor-preview">
+                          {Object.keys(horarioProfesorInfo.horario).map(dia => (
+                            <span key={dia} className="dia-preview">
+                              {dia}: {horarioProfesorInfo.horario[dia].length} clase(s)
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                  )}
+                  <td className="horarios-acciones">
+                    <button
+                      className="ver-horario-btn"
+                      onClick={() => handleVerHorario(h)}
+                    >
+                      <FiEye title="Ver horario" /> Ver horario
+                    </button>
+                    {!esProfesor && (
+                      <button
+                        className="eliminar-horario-btn"
+                        onClick={() => handleEliminarHorario(h.id)}
+                        title="Eliminar horario"
+                      >
+                        <FiTrash2 /> Eliminar
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-      </div>
-    </main>
-    <Footer />
-  </div>
-);
+
+        {/* Usar HorarioTable para mostrar el horario seleccionado */}
+        {horarioSeleccionado && (
+          <div className="modal-overlay">
+            <div className="modal-horario-container">
+              <HorarioTable
+                horario={horarioSeleccionado.horario}
+                grupo={horarioSeleccionado.grupo}
+                horarioProfesor={horarioSeleccionado.horarioProfesor}
+              />
+              <button 
+                className="modal-close-btn" 
+                onClick={handleCerrarHorario}
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        )}
+
+        {mostrarModal && !esProfesor && (
+          <GenerarHorario
+            onClose={() => setMostrarModal(false)}
+            onHorarioCreado={handleHorarioCreado}
+          />
+        )}
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default Horario;

@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/modal.css'; 
+import '../../styles/modal.css';
+import { register } from '../../services/authService';
 
 const RegistrarUsuario = () => {
   const [formData, setFormData] = useState({
     nombre: '',
+    apellidom: '',
+    apellidop: '',
     email: '',
     password: '',
     confirmar: '',
-    colegio: '',
+    dob: '',
+    username : '',
+    phone : ''
   });
 
   const navigate = useNavigate();
@@ -20,7 +25,7 @@ const RegistrarUsuario = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmar) {
       alert("Las contraseñas no coinciden");
@@ -28,15 +33,24 @@ const RegistrarUsuario = () => {
     }
 
     console.log("Usuario registrado:", formData);
-    navigate('/Home');
+    try {
+      console.log('Intentando registrar usuario con:', formData);
+      const data = await register(formData);
+      console.log('Usuario registrado exitosamente:', data);
+
+      navigate('/');
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+    }
   };
 
   const handleCancel = () => {
     console.log('cancelar');
-    window.location.href = '/';
+    window.location.href = '/home';
 };
 
   return (
+    <div className="modal-overlay">
     <div className="crearcolegio-container">
       <div className="crearcolegio-card">
         <h2 className="crearcolegio-title">Agregar usuario</h2>
@@ -45,13 +59,58 @@ const RegistrarUsuario = () => {
           <input
             type="text"
             name="nombre"
-            placeholder="Ej. Paola Salazar"
+            placeholder="Ej. Paola"
             value={formData.nombre}
             onChange={handleChange}
             className="crearcolegio-input"
             required
           />
-
+          <div className="crearcolegio-row">
+            <div style={{ flex: 1, marginRight: '10px' }}>
+              <label className="crearcolegio-label">Apellido Materno</label>
+              <input
+                type="text"
+                name="apellidom"
+                placeholder="Ej. Salazar"
+                value={formData.apellidom}
+                onChange={handleChange}
+                className="crearcolegio-input"
+                required
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label className="crearcolegio-label">Apellido Paterno</label>
+              <input
+                type="text"
+                name="apellidop"
+                placeholder="Ej. López"
+                value={formData.apellidop}
+                onChange={handleChange}
+                className="crearcolegio-input"
+                required
+              />
+            </div>
+          </div>
+          
+          <label className="crearcolegio-label">Fecha de nacimiento</label>
+          <input
+            type="date"
+            name="dob"
+            value={formData.dob}
+            onChange={handleChange}
+            className="crearcolegio-input"
+            required
+          />
+          <label className="crearcolegio-label">Teléfono</label>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Ej. 1234567890"
+            value={formData.phone}
+            onChange={handleChange}
+            className="crearcolegio-input"
+            required
+          />
           <label className="crearcolegio-label">Email</label>
           <input
             type="email"
@@ -62,30 +121,46 @@ const RegistrarUsuario = () => {
             className="crearcolegio-input"
             required
           />
-
-          <label className="crearcolegio-label">Contraseña</label>
+          <label className="crearcolegio-label">Usuario</label>
           <input
-            type="password"
-            name="password"
-            placeholder="Mínimo 6 caracteres"
-            value={formData.password}
+            type="text"
+            name="username"
+            placeholder="Ej. paola123"
+            value={formData.username}
             onChange={handleChange}
             className="crearcolegio-input"
             required
           />
 
-          <label className="crearcolegio-label">Confirmar contraseña</label>
-          <input
-            type="password"
-            name="confirmar"
-            placeholder="Repetir contraseña"
-            value={formData.confirmar}
-            onChange={handleChange}
-            className="crearcolegio-input"
-            required
-          />
+          {/* Agrupar contraseñas */}
+          <div className="crearcolegio-row">
+            <div style={{ flex: 1, marginRight: '10px' }}>
+              <label className="crearcolegio-label">Contraseña</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Mínimo 6 caracteres"
+                value={formData.password}
+                onChange={handleChange}
+                className="crearcolegio-input"
+                required
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label className="crearcolegio-label">Confirmar contraseña</label>
+              <input
+                type="password"
+                name="confirmar"
+                placeholder="Repetir contraseña"
+                value={formData.confirmar}
+                onChange={handleChange}
+                className="crearcolegio-input"
+                required
+              />
+            </div>
+          </div>
 
-          <label className="crearcolegio-label">Nombre del colegio</label>
+          {/*<label className="crearcolegio-label">Nombre del colegio</label>
           <select
             name="colegio"
             value={formData.colegio}
@@ -96,9 +171,9 @@ const RegistrarUsuario = () => {
             <option value="">Seleccionar...</option>
             <option value="Colegio A">Colegio A</option>
             <option value="Colegio B">Colegio B</option>
-          </select>
+          </select>*/}
 
-          <label className="crearcolegio-label">Rol</label>
+          {/*<label className="crearcolegio-label">Rol</label>
           <select
             name="rol"
             value={formData.rol}
@@ -109,7 +184,7 @@ const RegistrarUsuario = () => {
             <option value="">Seleccionar...</option>
             <option value="Administrador">Administrador</option>
             <option value="Profesor">Profesor</option>
-          </select>
+          </select>*/}
 
           <button type="submit" className="crearcolegio-btn">
             Guardar y continuar
@@ -119,6 +194,7 @@ const RegistrarUsuario = () => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

@@ -45,13 +45,14 @@
     display: flex;
     align-items: center;
     color: white;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border: 2px solid white !important;
     border-radius: 20px !important;
     background-color: transparent !important;
     color: #ffffff !important;
     font-size: 16px !important;
     width: 28% !important;
+    position: relative;
   }
   
   .materias-busqueda input {
@@ -59,14 +60,18 @@
     background: transparent;
     outline: none;
     font-size: 14px;
-    color: #46687c;
+    color: #2F4156;
   }
   
   .materias-icono-buscar {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 18px;
-    color: #6b8ca2;
-    margin-left: 4px;
-  }
+    color: #2F4156;
+    cursor: pointer;
+    }
   
   .materias-boton {
     background: #567C8D;
@@ -94,7 +99,7 @@
   .materias-tabla thead {
     background: #6b8ca2;
     color: white;
-    text-align: left;
+    text-align:center;
   }
   
   .materias-tabla th,
@@ -105,18 +110,18 @@
   }
   
   .materias-tabla tbody tr {
-    border-bottom: 1px solid #b2cbe2;
-    color: #46687c;
+    color: #2F4156;
+    text-align:center;
   }
   
-  .materias-chip {
+  .grupo-chip {
     display: inline-block;
-    background: #e3f0fa;
-    border: 1px solid #6b8ca2;
-    color: #46687c;
-    border-radius: 16px;
-    padding: 2px 10px;
-    font-size: 13px;
+    background: transparent;
+    border: 1.5px solid #2F4156;
+    color: #2F4156;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
     margin-right: 6px;
     margin-bottom: 4px;
   }
@@ -130,6 +135,85 @@
   .accion-icono{
     width: 40px;
     height: 22px;
+    cursor: pointer;
     
+}
+
+.ver-materia-btn,
+.editar-materia-btn,
+.eliminar-materia-btn,
+.ver-grupo-btn,
+.editar-grupo-btn,
+.eliminar-grupo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 3px;
+}
+
+.ver-materia-btn,
+.ver-grupo-btn {
+  background-color: #6b8ca2;
+  color: white;
+}
+
+.ver-materia-btn:hover,
+.ver-grupo-btn:hover {
+  background-color: #2F4156;
+  transform: translateY(-2px);
+}
+
+.editar-materia-btn,
+.editar-grupo-btn {
+  background-color: #f39c12;
+  color: white;
+}
+
+.editar-materia-btn:hover,
+.editar-grupo-btn:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+.eliminar-materia-btn,
+.eliminar-grupo-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.eliminar-materia-btn:hover,
+.eliminar-grupo-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+.materias-acciones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.materias-controles{
+    display: flex;
+    gap: 50px;
+    justify-content: right;
+    padding-bottom: 25px;
+}
+
+.materias-colegio h2{
+    color: #2F4156;
+    font-weight: 400;
+}
+
+.materias-colegio p{
+    color: #567C8D;
+    padding-top: 5px;
 }
   

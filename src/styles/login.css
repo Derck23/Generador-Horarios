@@ -164,66 +164,33 @@
 }
 
 @media (max-width: 480px) {
-  .login-card {
-    width: 100%;
-    height: auto;
-    flex-direction: column;
-    padding: 0px !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    font-size: 14px !important;
+  .homeadmin-main {
+    padding: 30px 15px;
   }
 
-  .login-left, .login-right {
-    position: static !important;
-    transform: none !important;
-    width: 100% !important;
-    text-align: center;
-    flex: 1 1 100%;
-    padding: 50px 0px !important;
-  }
-
-  .login-right {
-    display: none !important;
-  }
-
-  .login-logo {
-    width: 120px;
+  .homeadmin-bienvenido {
+    font-size: 1.6rem;
+    letter-spacing: 0.2em;
     margin-bottom: 20px;
   }
 
-  .login-form-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  .homeadmin-nombre {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
   }
 
-  .login-form {
-    padding: 0 10px;
-    gap: 10px;
-    max-width: 100%;
+  .homeadmin-btn-group {
+    flex-direction: column;
+    gap: 12px;
     width: 100%;
   }
 
-  .login-form input {
-    width: 100% !important;
-    min-width: unset !important;
-    max-width: 100% !important;
-    padding: 10px !important;
-    font-size: 14px !important;
-  }
-
-  .login-form button {
-    width: 100% !important;
-    min-width: unset !important;
-    max-width: 100% !important;
-  }
-
-  .register-text {
-    margin-top: 30px;
-    font-size: 13px;
+  .homeadmin-btn {
+    font-size: 1rem;
+    padding: 12px;
   }
 }
+
 
 @media (max-width: 768px) {
   .login-card {

@@ -2,68 +2,52 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import '../styles/materia.css';
-import { FiEye, FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import RegistrarMateria from '../Components/Modal/RegistrarMateria';
+import { obtenerMaterias, eliminarMateria } from '../services/colegioService'; // <-- Importa el servicio
 
 const Materia = () => {
   const [materias, setMaterias] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
 
-  useEffect(() => {
-    const datosEjemplo = [
-      {
-        id: 1,
-        nombre: 'Física',
-        clave: 'FIS004',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 2,
-        nombre: 'Química',
-        clave: 'QUI004',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 3,
-        nombre: 'Inglés',
-        clave: 'ING004',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 4,
-        nombre: 'Matemáticas I',
-        clave: 'MAT001',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 5,
-        nombre: 'Matemáticas II',
-        clave: 'MAT002',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 6,
-        nombre: 'Matemáticas III',
-        clave: 'MAT003',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-      {
-        id: 7,
-        nombre: 'Español',
-        clave: 'ESPO04',
-        grupos: ['3 A', '2 A', '1 B'],
-        horas: '12 hrs por semana',
-      },
-    ];
+  // Cargar materias desde el backend
+  const fetchMaterias = async () => {
+    try {
+      const data = await obtenerMaterias();
+      setMaterias(data);
+    } catch (error) {
+      console.error("Error al obtener materias:", error);
+      setMaterias([]);
+    }
+  };
 
-    setMaterias(datosEjemplo);
+  useEffect(() => {
+    fetchMaterias();
   }, []);
+
+  const handleVerMateria = (materia) => {
+  };
+
+  const handleEditarMateria = (materia) => {
+  };
+
+  const handleEliminarMateria = async (id) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar esta materia?')) {
+      try {
+        await eliminarMateria(id);
+        await fetchMaterias(); // Recargar lista
+        alert('Materia eliminada exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar materia:", error);
+        alert('Error al eliminar la materia');
+      }
+    }
+  };
+
+  const handleMateriaCreada = async () => {
+    await fetchMaterias(); // Recargar lista cuando se crea una materia
+  };
+
 
   return (
     <div className="materias-page">
@@ -78,7 +62,7 @@ const Materia = () => {
           <div className="materias-controles">
             <div className="materias-busqueda">
               <input type="text" placeholder="Buscar..." />
-              <span className="icono-busqueda">🔍</span>
+              <FiSearch className="materias-icono-buscar" />
             </div>
             <button
               className="materias-boton"
@@ -102,20 +86,42 @@ const Materia = () => {
           <tbody>
             {materias.map((materia) => (
               <tr key={materia.id}>
-                <td>{materia.nombre}</td>
-                <td>{materia.clave}</td>
+                <td>{materia.nombreMateria || materia.nombre}</td>
+                <td>{materia.clave || '-'}</td>
                 <td>
-                  {materia.grupos.map((grupo, index) => (
-                    <span key={index} className="grupo-chip">
-                      {grupo}
-                    </span>
-                  ))}
+                  {(materia.grupos && Array.isArray(materia.grupos)) ? (
+                    materia.grupos.map((grupo, index) => (
+                      <span key={index} className="grupo-chip">
+                        {grupo}
+                      </span>
+                    ))
+                  ) : (
+                    <span>-</span>
+                  )}
                 </td>
                 <td>{materia.horas}</td>
                 <td className="materias-acciones">
-                  <FiEye className="accion-icono" title="Ver" />
-                  <FiEdit2 className="accion-icono" title="Editar" />
-                  <FiTrash2 className="accion-icono" title="Eliminar" />
+                  {/*<button 
+                    className="ver-materia-btn"
+                    onClick={() => handleVerMateria(materia)}
+                    title="Ver"
+                  >
+                    <FiEye /> Ver
+                  </button>
+                  <button 
+                    className="editar-materia-btn"
+                    onClick={() => handleEditarMateria(materia)}
+                    title="Editar"
+                  >
+                    <FiEdit2 /> Editar
+                  </button>*/}
+                  <button 
+                    className="eliminar-materia-btn"
+                    onClick={() => handleEliminarMateria(materia.id)}
+                    title="Eliminar"
+                  >
+                    <FiTrash2 /> Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
@@ -124,7 +130,10 @@ const Materia = () => {
       </main>
 
       {mostrarModal && (
-        <RegistrarMateria onClose={() => setMostrarModal(false)} />
+        <RegistrarMateria
+          onClose={() => setMostrarModal(false)}
+          onMateriaAgregada={handleMateriaCreada}
+        />
       )}
 
       <Footer />

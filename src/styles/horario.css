@@ -1,0 +1,237 @@
+.horarios-page {
+    background: #C8D9E6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .horarios-main {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  
+  .horarios-colegio h2 {
+    color: #2F4156;
+    font-weight: 400;
+  }
+  
+  .horarios-colegio p {
+    color: #567C8D;
+    padding-top: 5px;
+  }
+  
+  .horarios-controles {
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    padding-bottom: 25px;
+  }
+  
+  .horarios-busqueda {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: 2px solid white;
+    border-radius: 20px;
+    background-color: transparent;
+    width: 30%;
+    position: relative;
+  }
+  
+  .horarios-busqueda input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #2F4156;
+    width: 100%;
+  }
+  
+  .horarios-icono-buscar {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #2F4156;
+    cursor: pointer;
+  }
+  
+  .horarios-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: #C8D9E6;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(100, 150, 180, 0.07);
+    overflow: hidden;
+  }
+  
+  .horarios-tabla thead {
+    background: #6b8ca2;
+    color: white;
+    text-align: center;
+  }
+  
+  .horarios-tabla th,
+  .horarios-tabla td {
+    padding: 14px 18px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  .horarios-tabla tbody tr {
+    color: #2F4156;
+  }
+  
+  .turno-chip {
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid #2F4156;
+    color: #2F4156;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  
+  .horarios-acciones svg {
+    margin-right: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+  }
+
+  .ver-horario-btn,
+  .eliminar-horario-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 4px;
+  }
+
+  .ver-horario-btn {
+    background-color: #6b8ca2;
+    color: white;
+  }
+
+  .ver-horario-btn:hover {
+    background-color: #2F4156;
+    transform: translateY(-2px);
+  }
+
+  .eliminar-horario-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .eliminar-horario-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+  }
+
+  .horarios-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  /* Estilos para el modal y botón de cierre */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(47, 65, 86, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-horario-container {
+  position: relative;
+  background: #C8D9E6;
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(47, 65, 86, 0.2);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  background: #6b8ca2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 100px;
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: #2F4156;
+  transform: rotate(90deg);
+}
+
+.modal-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.info-profesor {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #6b8ca2;
+}
+
+.info-profesor h3 {
+  color: #2F4156;
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.info-profesor p {
+  color: #567C8D;
+  margin: 0;
+  font-size: 14px;
+}
+
+.materias-profesor-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dia-preview {
+  font-size: 12px;
+  color: #2F4156;
+  background: rgba(107, 140, 162, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}

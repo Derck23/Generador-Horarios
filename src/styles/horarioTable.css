@@ -1,0 +1,46 @@
+.horario-container {
+    background-color: #C8D9E6;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .horario-titulo {
+    color: #2F4156;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .horario-tabla-scroll {
+    overflow-x: auto;
+  }
+  
+  .horario-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background: white;
+    color: #2F4156;
+  }
+  
+  .horario-tabla th,
+  .horario-tabla td {
+    border: 1px solid #6b8ca2;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .horario-tabla th {
+    background-color: #6b8ca2;
+    color: white;
+  }
+  
+  @media (min-width: 600px) {
+    .horario-tabla {
+      font-size: 1.1rem;
+    }
+  }
+
+  

@@ -2,16 +2,19 @@ import React from 'react';
 import Navbar from '../Components/Navbar.jsx';
 import Footer from '../Components/Footer.jsx';
 import '../styles/home.css';
-import logo from '../assets/logohorarios_1.png';
+//import logo from '../assets/logohorarios_1.png';
 import { useState, useEffect } from 'react';
 import CrearColegio from '../Components/Modal/CrearColegio';
-
+import RegistrarUsuario from '../Components/Modal/RegistrarUsuario.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const HomeAdmin = () => {
 
   const [usuario, setUsuario] = useState('Usuario');
   const [mostrarCrearColegio, setMostrarCrearColegio] = useState(false);
-  
+  const [mostrarRegistrarUsuario, setMostrarRegistrarUsuario] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
     setUsuario(nombreUsuario);
@@ -22,19 +25,24 @@ const HomeAdmin = () => {
       <Navbar active="HOME" />
       <main className="homeadmin-main">
   <h2 className="homeadmin-bienvenido">¡B I E N V E N I D O!</h2>
-  <p className="homeadmin-nombre">{usuario}</p>
+  <p className="homeadmin-nombre">GENERADOR DE HORARIOS</p>
   <div className="homeadmin-btn-group">
-    <button className="homeadmin-btn">Crear Usuario</button>
-    <button className="homeadmin-btn">Crear Horario</button>
-    <button
+    {/*<button className="homeadmin-btn" onClick={() => setMostrarRegistrarUsuario(true)}>Crear Usuario</button>*/}
+    <button className="homeadmin-btn" onClick={() => navigate('/Horario')}>Crear Horario</button>
+    {/*<button
       className="homeadmin-btn"
       onClick={() => setMostrarCrearColegio(true)}
+      
     >
       Crear Colegio
-    </button>
+    </button>*/}
 
     {mostrarCrearColegio && (
       <CrearColegio onClose={() => setMostrarCrearColegio(false)} />
+    )}
+
+    {mostrarRegistrarUsuario && (
+      <RegistrarUsuario onClose={() => setMostrarRegistrarUsuario(false)} />
     )}
   </div>
 </main> 

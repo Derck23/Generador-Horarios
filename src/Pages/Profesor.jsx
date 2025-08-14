@@ -1,122 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import '../styles/home.css';
+import '../styles/profesor.css';
+import { FiEye, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
+import RegistrarProfesor from '../Components/Modal/RegistrarProfesor';
+import { listarProfesores, eliminarProfesor } from '../services/profesorService'; // Importa el servicio
 
-const profesores = [
-  {
-    id: 1,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  // Puedes duplicar este objeto para simular más filas
-  {
-    id: 2,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 3,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 4,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 5,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 6,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-  {
-    id: 7,
-    nombre: 'José Luis Hernández López',
-    materias: ['Física', 'Química', 'Matemáticas'],
-    grupos: ['3 A', '2 A', '1 B'],
-    horas: '12 hrs por semana',
-  },
-];
+const Profesor = () => {
+  const [buscar, setBuscar] = useState('');
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [profesores, setProfesores] = useState([]); // Nuevo estado
 
-const Profesor = () => (
-  <div className="home-page">
-    <Navbar active="PROFESORES" />
-    <main className="home-main" style={{ alignItems: 'flex-start', width: '100%' }}>
-      <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ margin: '32px 0 16px 0' }}>
-          <div style={{ fontSize: '1.3rem', color: '#46687c', fontWeight: 500 }}>
-            Colegio Nuevo Continente
-          </div>
-          <div style={{ color: '#6b8ca2', fontSize: '1rem' }}>
-            Plantel Querétaro<br />
-            Nivel: Secundaria
-          </div>
+  const fetchProfesores = async () => {
+    try {
+      const data = await listarProfesores();
+      console.log("Respuesta de listarProfesores:", data);
+      setProfesores(Array.isArray(data.data) ? data.data : []);
+    } catch (error) {
+      console.error("Error al cargar los profesores:", error);
+      setProfesores([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfesores();
+  }, []);
+
+  const handleEliminarProfesor = async (profesorId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este profesor?')) {
+      try {
+        await eliminarProfesor(profesorId);
+        await fetchProfesores(); // Recargar lista
+        alert('Profesor eliminado exitosamente');
+      } catch (error) {
+        console.error("Error al eliminar profesor:", error);
+        alert('Error al eliminar el profesor');
+      }
+    }
+  };
+
+  const handleProfesorCreado = async () => {
+    await fetchProfesores(); // Recargar lista cuando se crea un profesor
+  };
+
+  const handleBuscar = () => {
+  };
+
+  return (
+    <div className="profesores-page">
+      <Navbar active="PROFESORES" />
+      <main className="profesores-main">
+        <div className="profesores-colegio">
+          <h2>Colegio Nuevo Continente</h2>
+          <p>Plantel Querétaro</p>
+          <p>Nivel: Secundaria</p>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
-          <input
-            type="text"
-            placeholder="Buscar..."
-            style={{
-              borderRadius: 12,
-              border: 'none',
-              padding: '6px 16px',
-              outline: 'none',
-              fontSize: 14,
-              background: '#e3f0fa',
-              color: '#46687c',
-              marginRight: 8,
-            }}
-          />
-          <span style={{ fontSize: 18, color: '#6b8ca2', alignSelf: 'center' }}>🔍</span>
+
+        <div className="profesores-controles">
+          <div className="profesores-busqueda">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={buscar}
+              onChange={(e) => setBuscar(e.target.value)}
+            />
+            <FiSearch className="profesores-icono-buscar" onClick={handleBuscar} />
+          </div>
           <button
-            style={{
-              marginLeft: 16,
-              background: '#6b8ca2',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 20,
-              padding: '7px 22px',
-              fontSize: 14,
-              fontWeight: 500,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
+            className="profesores-boton"
+            onClick={() => setMostrarModal(true)}
           >
-            <span style={{ fontSize: 18 }}>＋</span> Crear profesor
+            <span>＋</span> Crear profesor
           </button>
         </div>
-        <table style={{
-          width: '100%',
-          background: 'white',
-          borderRadius: 10,
-          overflow: 'hidden',
-          borderCollapse: 'separate',
-          borderSpacing: 0,
-          boxShadow: '0 2px 8px rgba(100,150,180,0.07)',
-        }}>
+
+        <table className="profesores-tabla">
           <thead>
-            <tr style={{ background: '#6b8ca2', color: '#fff', textAlign: 'left' }}>
-              <th style={{ padding: '14px 18px' }}>Nombre</th>
+            <tr>
+              <th>Nombre</th>
               <th>Materias</th>
               <th>Grupos</th>
               <th>Hrs. de clase</th>
@@ -124,51 +85,76 @@ const Profesor = () => (
             </tr>
           </thead>
           <tbody>
-            {profesores.map((p, idx) => (
-              <tr key={idx} style={{ borderBottom: '1px solid #b2cbe2', color: '#46687c' }}>
-                <td style={{ padding: '12px 18px' }}>{p.nombre}</td>
+            {profesores.map((profesor) => (
+              <tr key={profesor.id}>
                 <td>
-                  {p.materias.map((m, i) => (
-                    <span key={i} style={{
-                      border: '1px solid #6b8ca2',
-                      borderRadius: 16,
-                      padding: '2px 10px',
-                      fontSize: 13,
-                      background: '#e3f0fa',
-                      marginRight: 6,
-                      marginBottom: 2,
-                      display: 'inline-block'
-                    }}>{m}</span>
+                  {`${profesor.nombre || profesor.nombres || ''} ${profesor.apellidoPaterno || ''} ${profesor.apellidoMaterno || ''}`}
+                </td>
+                <td>
+                  {(profesor.materias || []).map((materia, index) => (
+                    <span key={index} className="profesor-chip">{materia}</span>
                   ))}
                 </td>
                 <td>
-                  {p.grupos.map((g, i) => (
-                    <span key={i} style={{
-                      border: '1px solid #6b8ca2',
-                      borderRadius: 16,
-                      padding: '2px 10px',
-                      fontSize: 13,
-                      background: '#e3f0fa',
-                      marginRight: 6,
-                      marginBottom: 2,
-                      display: 'inline-block'
-                    }}>{g}</span>
+                  {(profesor.grupos || []).map((grupo, index) => (
+                    <span key={index} className="profesor-chip">{grupo}</span>
                   ))}
                 </td>
-                <td>{p.horas}</td>
-                <td>
-                  <span title="Ver" style={{ marginRight: 12, cursor: 'pointer' }}>⏲️</span>
-                  <span title="Editar" style={{ marginRight: 12, cursor: 'pointer' }}>✏️</span>
-                  <span title="Eliminar" style={{ cursor: 'pointer' }}>🗑️</span>
+                <td>{profesor.horas}</td>
+                <td className="profesores-acciones">
+                  {/*<button
+                    className="ver-profesor-btn"
+                    title="Ver"
+                  >
+                    <FiEye /> Ver
+                  </button>
+                  <button
+                    className="editar-profesor-btn"
+                    title="Editar"
+                  >
+                    <FiEdit2 /> Editar
+                  </button>*/}
+                  <button
+                    className="eliminar-profesor-btn"
+                    onClick={() => handleEliminarProfesor(profesor.id)}
+                    title="Eliminar"
+                  >
+                    <FiTrash2 /> Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-    </main>
-    <Footer />
-  </div>
-);
+        {mostrarModal && (
+          <div className="modal-overlay">
+            <RegistrarProfesor 
+              onClose={() => setMostrarModal(false)}
+              onProfesorCreado={handleProfesorCreado}
+            />
+            <button
+              className="modal-close"
+              onClick={() => setMostrarModal(false)}
+              style={{
+                position: 'absolute',
+                top: 20,
+                right: 30,
+                background: 'transparent',
+                border: 'none',
+                fontSize: '2rem',
+                cursor: 'pointer',
+                color: '#333'
+              }}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+          </div>
+        )}
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default Profesor;

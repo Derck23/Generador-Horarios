@@ -22,7 +22,8 @@ const Login = () => {
       console.log('Intentando iniciar sesión con:', form);
       const data = await login({ username: form.username, password: form.password });
       
-      localStorage.setItem('token', data.token); // guardar token
+      localStorage.setItem('token', data.data.token); // guardar token
+      localStorage.setItem('user', JSON.stringify(data.data.user));
       // redirigir a dashboard o home
       window.location.href = '/home';
     } catch (err) {
@@ -55,11 +56,6 @@ const Login = () => {
           <button type="submit">Iniciar Sesión</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
-          <div className="login-content">
-          <p className="register-text">
-            ¿No tienes cuenta? <Link to="/registrar-usuario">Registrarme</Link>
-          </p>
-        </div>
         </div>
         <div className="login-right">
           <img src={agenda} alt="Ilustración" className="login-image" />
