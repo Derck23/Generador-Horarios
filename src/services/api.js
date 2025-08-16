@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Instancia base de Axios
 const api = axios.create({
-  baseURL: 'https://generadorhorariosbackend.vercel.app',
+  baseURL: 'https://generadorhorarios-backend.onrender.com/',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
